@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+import dao.ConnectionProvider;
+
 public class DBtest {
 	public static void main(String[] args) throws ClassNotFoundException {
 		Scanner scanner = new Scanner(System.in);
