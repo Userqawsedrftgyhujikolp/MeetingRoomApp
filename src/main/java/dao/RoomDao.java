@@ -15,8 +15,7 @@ public class RoomDao {
 		public static RoomBean[] findAll() {
 			//JDBC固定コンボ4つ
 			String sql = "SELECT * FROM room"; 
-			Connection conn = ConnectionProvider
-
+			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
 			
@@ -32,7 +31,7 @@ public class RoomDao {
 			for(int i = 0 ; i < list.size(); ++i){
 				result[i] = list.get(i);
 			}
-				return result;
+				return list.toArray(new RoomBean[0]);
 	
 		}}
 
