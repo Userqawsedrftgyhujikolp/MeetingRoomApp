@@ -1,25 +1,28 @@
 import java.sql.Connection;
-import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Scanner;
 
 public class DBtest {
-
-	public static void main(String[] args) {
-		// TODO 自動生成されたメソッド・スタブ
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-		}catch(ClassNotFoundException e) {
-			System.out.println("ドライバが見つかりません");
-			return;
-		}
-		String url = "jdbc:mysql://localhost:3306/book";
-		String user = "root";
-		String pass = "pass";
-		try(Connection conn = DriverManager.getConnection(url,user,pass)){
-			System.out.println("DB状態 -> "+conn.isClosed());
-		}catch(SQLException e) {
+	public static void main(String[] args) throws ClassNotFoundException {
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("idを入力してください:");
+		String inputId = scanner.nextLine();
+		String sql = "SELECT * FROM user WHERE id=?";
+		try (Connection conn = ConnectionProvider.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, inputId);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				System.out.println(
+						rs.getString("id") + "\t" +
+								rs.getString("password") + "\t" +
+								rs.getString("name") + "\t" +
+								rs.getString("address"));
+			}
+		} catch (SQLException e) {
 			System.out.println("SQLエラー");
 		}
 	}
-
 }
