@@ -4,11 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import bean.ReservationBean;
 
 public class ReservationDao {
+
 	//	コンストラクタ
 	private ReservationDao() {
 	}
@@ -17,7 +19,7 @@ public class ReservationDao {
 	//	利用日の予約日を検索
 	public static List<ReservationBean> findByDate(String date) throws SQLException, ClassNotFoundException {
 		//DB取得結果を格納するリスト
-		ReservationBean rList = new ReservationBean();
+		List<ReservationBean> rList = new ArrayList<ReservationBean>();
 		//データベース接続
 		String sql = "SELECT * FROM reservation WHERE date = ?";
 		try (Connection conn = ConnectionProvider.getConnection();
@@ -35,8 +37,9 @@ public class ReservationDao {
 					String yoyakuuserId = rs.getString("userId");
 					ReservationBean kensaku = new ReservationBean(yoyakuid, yoyakudate, yoyakuroomId, yoyakustart,
 							yoyakuend, yoyakuuserId);
-					//rList.add(kensaku);
+					rList.add(kensaku);
 				}
+				return rList;
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -67,7 +70,7 @@ public class ReservationDao {
 
 	//	予約を削除するメソッド
 	public static boolean delete(ReservationBean reservation) throws ClassNotFoundException {
-		String sql = "SELECT * FROM reservation WHERE id = ?";
+		String sql = "DELETE FROM reservation WHERE id = ?";
 		try (Connection conn = ConnectionProvider.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			//プレースホルダーに値を設定
