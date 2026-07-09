@@ -22,13 +22,13 @@ public class MeetingRoom {
 		Calendar cl = Calendar.getInstance();
 		this.date = sdf.format(cl.getTime());
 		this.user = null;
-		this.rooms = RoomDAO.findAll();
+		this.rooms = null;//RoomDAO.findAll();
 	}
 
 	//method
 	public static void main(String args[]) {
 		MeetingRoom MR = new MeetingRoom();
-		System.out.println(MR.getDate());
+		System.out.println(MR.toString());
 
 	}
 
@@ -74,7 +74,7 @@ public class MeetingRoom {
 	}
 
 	public void setDate(String date) throws IllegalArgumentException {//閲覧・利用する時刻設定
-		if (date.matches("[0-9]{4}/[0-9]{2}/[0-9]{2}")) {
+		if (date.matches("[0-9]{4}-[0-9]{2}-[0-9]{2}")) {
 			this.date = date;
 		} else {
 			throw new IllegalArgumentException("正しくない日付が入力されました");
@@ -122,7 +122,7 @@ public class MeetingRoom {
 	}
 
 	public void reserve(ReservationBean reservation) throws Exception {//予約実行
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		//現在時刻の取得
 		Calendar cl = Calendar.getInstance();
 		//予約リクエストの時刻の取得
@@ -139,7 +139,7 @@ public class MeetingRoom {
 	}
 
 	public void cancel(ReservationBean reservation) throws Exception {//キャンセル実行
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		//現在時刻の取得
 		Calendar cl = Calendar.getInstance();
 		//予約リクエストの時刻の取得
@@ -161,13 +161,20 @@ public class MeetingRoom {
 			period += (str + ", ");
 		}
 		period += "}";
-		String room = "{";
-		for (RoomBean roomB : rooms) {
-			room += (roomB.toString() + ", ");
+		String room;
+		if (rooms == null) {
+			room = null;
+		}else {
+			room = "{";
+			for (RoomBean roomB : rooms) {
+				
+				room += (roomB.toString() + ", ");
+			}
+			room += "}";
 		}
-		room += "}";
+		
 		return "MeetingRoom {\n\tINTERVAL:" + INTERVAL + "\n\tPERIOD:" + period + "\n\tdate:" + date + "\n\tuser:"
-				+ user + "\n\tRoomBean:" + room + "}";
+				+ user + "\n\tRoomBean:" + room + "\n}";
 	}
 
 }
