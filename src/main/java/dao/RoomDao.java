@@ -21,11 +21,7 @@ public class RoomDao {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 			System.out.println("SQLに関するえらーです。");
-			
-			
-		}
-		
-	}
+		}}
 		//コンストラクタ
 		private RoomDao() {}
 		//メソッド-----すべての会議室を検索する
@@ -38,15 +34,15 @@ public class RoomDao {
 		try(
 			ResultSet rs = pstmt.executeQuery()){
 			
-			List <RoomBean> list = new ArrayList <RoomBean>();
+			List <RoomBean> list = new ArrayList <RoomBean>();//空のリストを作って新しく部屋を用意した
 			while(rs.next()) {
-				RoomBean bean = new RoomBean(rs.getString("id"),rs.getString("name"));
+				RoomBean bean = new RoomBean(rs.getString("id"),rs.getString("name")); //DBから1つずつ取り出して箱に入れる
 				list.add(bean);	
 			}
-			if(list.size() == 0) {
-				return null;
+			if(list.size() == 0) { //もしリストが空なら
+				return null; //nullを返すよ。
 			}
-			RoomBean[] result = new RoomBean[list.size()];
+			RoomBean[] result = new RoomBean[list.size()];//リストに入っているデータの数と同じサイズの配列を作った
 			for(int i = 0 ; i < list.size(); ++i){
 				result[i] = list.get(i);
 			}
