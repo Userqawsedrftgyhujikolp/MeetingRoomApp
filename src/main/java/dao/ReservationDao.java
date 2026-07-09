@@ -15,21 +15,30 @@ public class ReservationDao {
 
 	//	メソッド
 	//	利用日の予約日を検索
-	public static List<ReservationBean> findByDate(String date) {
+	public static List<ReservationBean> findByDate(String date) throws SQLException, ClassNotFoundException {
 		//DB取得結果を格納するリスト
 		ReservationBean rList = new ReservationBean();
-		//		データベース接続
+		//データベース接続
 		String sql = "SELECT * FROM reservation WHERE date = ?";
 		try (Connection conn = ConnectionProvider.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			//					プレースホルダーに値を設定
-			pstmt.setString(1, reservation.getDate());
+			//プレースホルダーに値を設定
+			pstmt.setString(1, date);
 			try (ResultSet rs = pstmt.executeQuery()) {
 				while (rs.next()) {
+					//ReservationBeanに引数を渡すためgetしたものを変数に格納
+					int yoyakuid = rs.getInt("id");
 					String yoyakudate = rs.getString("date");
-					ReservationBean kensaku = new ReservationBean();
-					//rList.add(kensaku)
+					String yoyakuroomId = rs.getString("roomId");
+					String yoyakustart = rs.getString("start");
+					String yoyakuend = rs.getString("end");
+					String yoyakuuserId = rs.getString("userId");
+					ReservationBean kensaku = new ReservationBean(yoyakuid, yoyakudate, yoyakuroomId, yoyakustart,
+							yoyakuend, yoyakuuserId);
+					//rList.add(kensaku);
 				}
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
 		}
 
@@ -41,12 +50,14 @@ public class ReservationDao {
 		String sql = "INSERT INTO reservation(roomId,date,start,end,userId)VALUES(?,?,?,?,?)";
 		try (Connection conn = ConnectionProvider.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			//プレースホルダーに値を設定
 			pstmt.setString(1, reservation.getRoomId());
 			pstmt.setString(2, reservation.getDate());
 			pstmt.setString(3, reservation.getStart());
 			pstmt.setString(4, reservation.getEnd());
 			pstmt.setString(5, reservation.getUserId());
 			int ret = pstmt.executeUpdate();
+			//更新したデータが0でなければtrue
 			return ret != 0;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -59,6 +70,7 @@ public class ReservationDao {
 		String sql = "SELECT * FROM reservation WHERE id = ?";
 		try (Connection conn = ConnectionProvider.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			//プレースホルダーに値を設定
 			pstmt.setInt(1, reservation.getId());
 			int ret = -1;
 			//executeQueryメソッド実行する
