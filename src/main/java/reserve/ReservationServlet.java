@@ -11,24 +11,31 @@ import javax.servlet.http.HttpServletResponse;
 import bean.ReservationBean;
 import dao.ReservationDao;
 
-
 @WebServlet("/ReservationServlet")
 public class ReservationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		リクエストで受信した文字をUTF-8文字コードで受信する
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		//		リクエストで受信した文字をUTF-8文字コードで受信する
 		request.setCharacterEncoding("UTF-8");
-//		データを受信
-		String date= request.getParameter("date");
-//		メソッドを呼び出す
-		ReservationBean rList = ReservationDao.findByDate(date);
-//		取得したDBデータをリクエスト属性に格納
-		request.setAttribute("kensaku", rList);
-		String nextPage="/reserved.jsp";
-		if(rList.size()==0) {
-			re
+		//		データを受信
+		String yoyakuid = request.getParameter("id");
+		String yoyakudate = request.getParameter("date");
+		String yoyakuroomId = request.getParameter("roomId");
+		String yoyakustart = request.getParameter("start");
+		String yoyakuend = request.getParameter("end");
+		String yoyakuuserId = request.getParameter("userId");
+		//		メソッドを呼び出す
+		ReservationBean rList = ReservationDao.insert();
+		if (rList.size() == 0) {
+			ReservationBean yoyaku = new ReservationBean(yoyakuid, yoyakudate, yoyakuroomId, yoyakustart, yoyakuend,
+					yoyakuuserId);
+			//			登録
+			request.setAttribute("yoyaku", yoyaku);
+			String nextPage = "/reserved.jsp";
 		}
+
 	}
 
 }
