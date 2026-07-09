@@ -3,7 +3,9 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException; 
+import java.sql.SQLException;
+
+import bean.UserBean; 
 
 public class UserDao {
 
@@ -12,19 +14,16 @@ public class UserDao {
 	private UserDao(){}
 	
 	//利用者IDとパスワードで利用者認証を行い，認証した利用者情報を返します。
-	public static Object certificate(String id,String password){
+	public static UserBean certificate(String id,String password){
 		if (id == null || id.isEmpty() || password == null || password.isEmpty()) {
             return null;
-            
-	//DB取得結果を格納する
-	String[] userData=new String[3];
-	
+		}    
 	//データベース接続
-	String sql="SELECT*FROM user WHERE user_id=?";
+	String sql="SELECT*FROM user WHERE id=? and passwoed=?";
 	
 	// try-with-resources構文でリソースを自動的にクローズ
 	try (
-            Connection conn = UserConnectionProvider.getConnection();
+            Connection conn = ConnectionProvider.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
 		// プレースホルダーに値を設定
         pstmt.setString(1,id);
@@ -34,19 +33,26 @@ public class UserDao {
         	//結果セットをViewへ送るための準備
         	while(rs.next()){
         		//結果セットから取得
-        		userData[0]=rs.getString("user_id");
-        		userData[1]=rs.getString("name");
-        		userData[2]=rs.getString("password");
+        		
+        		String id1 = rs.getString("id");
+        		String password1 = rs.getString("password");
+        		String name = rs.getString("name");
+        		String address = rs.getString("address");
+        		UserBean user = new UserBean(id1,password1,name,address);
+        		return user;
+        		
+        		//userData[2]=rs.getString("password");
         	}
-        }catch(ClassNotFoundException e) {
-        	e.printStackTrace();
         }
     			System.out.println("ドライバが見つかりません");
 	    }catch(SQLException e) {
     		e.printStackTrace();
-    	 }
+    	 } catch (ClassNotFoundException e1) {
+			// TODO 自動生成された catch ブロック
+			e1.printStackTrace();
+		}
     			System.out.println("SQLに関するエラーです");		
-        }
+        
 		//try-with-resourcesによりconnとpstmtは自動的にクローズされる
 		return null;
 	}
