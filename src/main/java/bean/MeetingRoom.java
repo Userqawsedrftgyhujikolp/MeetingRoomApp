@@ -35,10 +35,6 @@ public class MeetingRoom {
 	}
 
 	//method
-	public static void main(String args[]) {
-		MeetingRoom MR = new MeetingRoom();		
-		
-	}
 
 	private int roomIdIndex(String roomId) throws IndexOutOfBoundsException {//会議室IDを入れ、配列のインデックス取得
 		for (int i = 0; rooms.length > i; i++) {
