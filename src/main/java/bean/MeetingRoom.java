@@ -35,10 +35,6 @@ public class MeetingRoom {
 	}
 
 	//method
-	public static void main(String args[]) {
-		MeetingRoom MR = new MeetingRoom();		
-		
-	}
 
 	private int roomIdIndex(String roomId) throws IndexOutOfBoundsException {//会議室IDを入れ、配列のインデックス取得
 		for (int i = 0; rooms.length > i; i++) {
@@ -119,7 +115,7 @@ public class MeetingRoom {
 				reserve[this.roomIdIndex(row.getRoomId())][this.startPeriod(row.getStart())] = row;
 			} catch (IndexOutOfBoundsException e) {
 				//会議室が定義外などの場合の処理
-				System.out.println("例外が発生しました\n原因のReservationBean->" + row.toString() + "\n" + e);
+				System.err.println("例外が発生しました\n原因のReservationBean->" + row.toString() + "\n" + e);
 				continue;
 			}
 		}
@@ -127,7 +123,10 @@ public class MeetingRoom {
 		return reserve;
 	}
 
-	public ReservationBean createReservation(String roomId, String start) {//予約情報生成
+	public ReservationBean createReservation(String roomId, String start) throws Exception {//予約情報生成
+		if(this.user == null) {
+			throw new Exception("未ログインです");
+		}
 		try {
 			DateTimeFormatter dTF = DateTimeFormatter.ofPattern("HH:mm");
 			String end = LocalTime.parse(start, dTF).plusMinutes(INTERVAL).format(dTF);
@@ -143,7 +142,6 @@ public class MeetingRoom {
 		Calendar cl = Calendar.getInstance();
 		//予約リクエストの時刻の取得
 		String reserveTime = reservation.getDate() + " " + reservation.getStart();
-		ReservationDao.insert(reservation);
 		if (cl.getTime().compareTo(sdf.parse(reserveTime)) > 0) {
 			throw new Exception("時刻が過ぎているため予約できません");
 		}
