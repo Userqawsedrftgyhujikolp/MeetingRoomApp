@@ -2,14 +2,16 @@ package reserve;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import bean.MeetingRoom;
 import bean.ReservationBean;
-import dao.ReservationDao;
 
 @WebServlet("/ReservationServlet")
 public class ReservationServlet extends HttpServlet {
@@ -20,22 +22,28 @@ public class ReservationServlet extends HttpServlet {
 		//		リクエストで受信した文字をUTF-8文字コードで受信する
 		request.setCharacterEncoding("UTF-8");
 		//		データを受信
-		String yoyakuid = request.getParameter("id");
+		HttpSession session = request.getSession();
+		int yoyakuid = Integer.parseInt(request.getParameter("id"));
 		String yoyakudate = request.getParameter("date");
 		String yoyakuroomId = request.getParameter("roomId");
 		String yoyakustart = request.getParameter("start");
 		String yoyakuend = request.getParameter("end");
 		String yoyakuuserId = request.getParameter("userId");
 		//		メソッドを呼び出す
-		ReservationBean rList = ReservationDao.insert();
-		if (rList.size() == 0) {
-			ReservationBean yoyaku = new ReservationBean(yoyakuid, yoyakudate, yoyakuroomId, yoyakustart, yoyakuend,
+		try{
+			ReservationBean rb = new ReservationBean(yoyakuid, yoyakudate, yoyakuroomId, yoyakustart, yoyakuend,
 					yoyakuuserId);
-			//			登録
-			request.setAttribute("yoyaku", yoyaku);
-			String nextPage = "/reserved.jsp";
+			MeetingRoom mr = new MeetingRoom();
+			mr.insert(rb);
+			
+			session.setAttribute("yoyaku", rb);
+			session.setAttribute("jikan", mr);
+			
+			RequestDispatcher rdp = request.getRequestDispatcher("reserveConfirm.jsp");
+			rdp.forward(request,response);
+		}catch(Exception e) {
+			request.setAttribute("error", "予約できませんでした");
+			RequestDispatcher rdp = request.getRequestDispatcher("reserveConfirm.jsp");
 		}
-
-	}
-
+}
 }
