@@ -19,7 +19,7 @@ public class UserDao {
             return null;
 		}    
 	//データベース接続
-	String sql="SELECT*FROM user WHERE id=? and passwoed=?";
+	String sql="SELECT*FROM user WHERE id=? and password=?";
 	
 	// try-with-resources構文でリソースを自動的にクローズ
 	try (

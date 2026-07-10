@@ -35,7 +35,11 @@ public class ReservationDao {
 					String yoyakustart = rs.getString("start");
 					String yoyakuend = rs.getString("end");
 					String yoyakuuserId = rs.getString("userId");
-					ReservationBean kensaku = new ReservationBean(yoyakuid, yoyakudate, yoyakuroomId, yoyakustart,
+					//時刻の修正（HH:mm:ss -> HH:mm）
+					yoyakustart = yoyakustart.substring(0, 5);
+					yoyakuend = yoyakuend.substring(0, 5);
+					
+					ReservationBean kensaku = new ReservationBean(yoyakuid, yoyakuroomId, yoyakudate ,yoyakustart,
 							yoyakuend, yoyakuuserId);
 					rList.add(kensaku);
 				}
@@ -75,10 +79,11 @@ public class ReservationDao {
 				PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			//プレースホルダーに値を設定
 			pstmt.setInt(1, reservation.getId());
-			int ret = -1;
+			int ret = 0;
 			//executeQueryメソッド実行する
 			ret = pstmt.executeUpdate();
 			System.out.println("予約を" + ret + "件、キャンセルしました");
+			return ret != 0;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
