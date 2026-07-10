@@ -9,7 +9,7 @@
 <body>
 <h1>会議室予約</h1>
 <h2>ログイン</h2>
-    <form action="/Login" method="post">
+    <form action="<%=request.getContextPath() %>/Login" method="post">
         利用者ID：<input type="text" name="userId"><br>
         パスワード：<input type="password" name="userPw"><br>
         <input type="submit" value="ログイン">
