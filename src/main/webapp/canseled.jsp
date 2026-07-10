@@ -4,12 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>キャンセル確認画面</title>
+<title>キャンセル確定画面</title>
 </head>
 <body>
-　<h1>会議室予約キャンセル</h1>
+<h1>会議室予約キャンセル</h1>
 <hr>
-　<h2>キャンセル確認</h2>
-  <form action=
+<h2>キャンセル完了</h2>
 </body>
 </html>

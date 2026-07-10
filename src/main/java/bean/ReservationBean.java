@@ -29,6 +29,8 @@ public class ReservationBean implements Serializable {
 
 	//	予約番号以外の会議室予約情報を基に初期化
 	public ReservationBean(String roomId, String date, String start, String end, String userId) {
+		this.id = 0;
+		this.roomId = roomId;
 		this.date = date;
 		this.start = start;
 		this.end = end;
