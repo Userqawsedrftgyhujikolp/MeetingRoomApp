@@ -7,6 +7,10 @@ import java.time.format.DateTimeParseException;
 import java.util.Calendar;
 import java.util.List;
 
+import dao.ReservationDao;
+import dao.RoomDao;
+import dao.UserDao;
+
 public class MeetingRoom {
 	//Field
 	private static final long serialVersionUID = 1L;//バージョン管理
@@ -22,23 +26,23 @@ public class MeetingRoom {
 		Calendar cl = Calendar.getInstance();
 		this.date = sdf.format(cl.getTime());
 		this.user = null;
-		this.rooms = null;//RoomDAO.findAll();
+		try {
+			this.rooms = RoomDao.findAll();
+		} catch (Exception e) {
+			System.err.println("MetingRoom->コンストラクタ : RoomDao.findAll()にて例外をキャッチしました\n"+e);
+			this.rooms = null;
+		}
 	}
 
 	//method
-	public static void main(String args[]) {
-		MeetingRoom MR = new MeetingRoom();
-		System.out.println(MR.toString());
-
-	}
 
 	private int roomIdIndex(String roomId) throws IndexOutOfBoundsException {//会議室IDを入れ、配列のインデックス取得
 		for (int i = 0; rooms.length > i; i++) {
-			if (roomId.equals(rooms[i].getName())) {
+			if (roomId.equals(rooms[i].getId())) {
 				return i;
 			}
 		}
-		throw new IndexOutOfBoundsException();
+		throw new IndexOutOfBoundsException("配列に存在しない会議室IDが入力されました");
 	}
 
 	private int startPeriod(String start) throws IndexOutOfBoundsException {//利用時刻を入れ、配列のインデックス取得
@@ -47,7 +51,7 @@ public class MeetingRoom {
 				return i;
 			}
 		}
-		throw new IndexOutOfBoundsException();
+		throw new IndexOutOfBoundsException("配列に存在しない時刻が入力されました");
 
 	}
 
@@ -62,7 +66,7 @@ public class MeetingRoom {
 	public RoomBean getRoom(String roomId) {//会議室IDから会議室取得
 		RoomBean roomForReturn = null;
 		for (RoomBean room : rooms) {
-			if (roomId.equals(room.getName())) {
+			if (roomId.equals(room.getId())) {
 				roomForReturn = room;
 			}
 		}
@@ -86,7 +90,7 @@ public class MeetingRoom {
 	}
 
 	public boolean login(String id, String password) {//ログイン
-		UserBean user = UserDAO.certificate(id, password);
+		UserBean user = UserDao.certificate(id, password);
 		if (user == null) {
 			return false;
 		} else {
@@ -97,21 +101,32 @@ public class MeetingRoom {
 
 	public ReservationBean[][] getReservations() {//会議室ごとの予約状況 ReservationBean[会議室][時間ごとの予約状況]
 		ReservationBean[][] reserve = new ReservationBean[rooms.length][PERIOD.length];
-		List<ReservationBean> reservFromDB = ReservationDAO.findByDate(this.date);
+		List<ReservationBean> reservFromDB;
+		try {
+			reservFromDB = ReservationDao.findByDate(this.date);
+		} catch (Exception e) {
+			System.err.println("MeetingRoom->getReservations(): ReservationDao.findByDate()にて例外をキャッチしました\n"+e); 
+			return null;
+		}
 		//返ってきたリストを1つづつ配列の対応する場所に格納
+		if(reservFromDB != null) {
 		for (ReservationBean row : reservFromDB) {
 			try {
 				reserve[this.roomIdIndex(row.getRoomId())][this.startPeriod(row.getStart())] = row;
 			} catch (IndexOutOfBoundsException e) {
 				//会議室が定義外などの場合の処理
-				System.out.println("例外が発生しました\n原因のReservationBean->" + row.toString() + "\n" + e);
+				System.err.println("例外が発生しました\n原因のReservationBean->" + row.toString() + "\n" + e);
 				continue;
 			}
+		}
 		}
 		return reserve;
 	}
 
-	public ReservationBean createReservation(String roomId, String start) {//予約情報生成
+	public ReservationBean createReservation(String roomId, String start) throws Exception {//予約情報生成
+		if(this.user == null) {
+			throw new Exception("未ログインです");
+		}
 		try {
 			DateTimeFormatter dTF = DateTimeFormatter.ofPattern("HH:mm");
 			String end = LocalTime.parse(start, dTF).plusMinutes(INTERVAL).format(dTF);
@@ -129,7 +144,6 @@ public class MeetingRoom {
 		String reserveTime = reservation.getDate() + " " + reservation.getStart();
 		if (cl.getTime().compareTo(sdf.parse(reserveTime)) > 0) {
 			throw new Exception("時刻が過ぎているため予約できません");
-			return;
 		}
 		if (ReservationDao.insert(reservation)) {
 			return;
@@ -145,13 +159,12 @@ public class MeetingRoom {
 		//予約リクエストの時刻の取得
 		String reserveTime = reservation.getDate() + " " + reservation.getStart();
 		if (cl.getTime().compareTo(sdf.parse(reserveTime)) > 0) {
-			throw new Exception("時刻が過ぎているため予約できません");
-			return;
+			throw new Exception("時刻が過ぎているためキャンセルできません");
 		}
 		if (ReservationDao.delete(reservation)) {
 			return;
 		} else {
-			throw new Exception("既に予約されています");
+			throw new Exception("既にキャンセルされています");
 		}
 	}
 
@@ -165,12 +178,12 @@ public class MeetingRoom {
 		if (rooms == null) {
 			room = null;
 		}else {
-			room = "{";
+			room = "{\n";
 			for (RoomBean roomB : rooms) {
 				
-				room += (roomB.toString() + ", ");
+				room += ("\t\t"+roomB.toString() + "\n");
 			}
-			room += "}";
+			room += "\t}";
 		}
 		
 		return "MeetingRoom {\n\tINTERVAL:" + INTERVAL + "\n\tPERIOD:" + period + "\n\tdate:" + date + "\n\tuser:"
