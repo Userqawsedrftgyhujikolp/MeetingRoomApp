@@ -36,7 +36,7 @@ public class ReserveCreateServlet extends HttpServlet {
 //			mr.createReservation(yoyakuroomId, yoyakustart);
 //			ReservationBean rb = mr.createReservation(yoyakuroomId, yoyakustart);
 			//	値をセット
-			MeetingRoom mr = (MeetingRoom) session.getAttribute("yoyakuday");
+			MeetingRoom mr = (MeetingRoom) session.getAttribute("meetingRoom");
 			ReservationBean rb = mr.createReservation(yoyakuroomId, yoyakustart);
 			//	予約が重複していないか(MeetingRoomにあるメソッドを使う。重複の確認)	
 //			mr.setDate(yoyakudate);
