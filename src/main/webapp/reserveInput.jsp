@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@page import="bean.MeetingRoom"%>
-	<%MeetingRoom mr = (MeetingRoom) session.getAttribute("meetingRoom");%>
+<%@page import="bean.MeetingRoom"%>
+<%
+MeetingRoom mr = (MeetingRoom) session.getAttribute("meetingRoom");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,6 +15,11 @@
 	<br>
 	<h2>利用日</h2>
 	<input type="date" id="date" value="<%=mr.getDate()%>" />
-	<h2>予約可能時間(<%=mr.getUser().getName()%>)</h2>
+	<h2>
+		予約可能時間(<%=mr.getUser().getName()%>)
+	</h2>
+	<%
+for()
+	%>
 </body>
 </html>
