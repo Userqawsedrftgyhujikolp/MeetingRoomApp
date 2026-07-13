@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import bean.MeetingRoom;
 
@@ -31,17 +32,23 @@ public class ChangeDateServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		MeetingRoom mr;
 		String reserv = request.getHeader("Referer");
-		if(reserv == null) {this.doGet(request, response);}
+		HttpSession session = request.getSession();
+		if(reserv == null) {this.doGet(request, response);return;}
 		try {
-			mr = (MeetingRoom)request.getAttribute("MeetingRoom");
+			mr = (MeetingRoom)session.getAttribute("meetingRoom");
 			mr.setDate(request.getParameter("date"));
+			session.setAttribute("meetingRoom", mr);
 		}catch(Exception e) {
 			mr = null;
+			System.err.println("ChangeDateSevletにて例外が発生しました\n");
+			e.printStackTrace();
 		}
 		if(mr != null) {
 			response.sendRedirect(reserv);
+			return;
 		}else {
-			response.sendRedirect(reserv);
+			response.sendRedirect(request.getContextPath()+"/login.jsp");
+			return;
 		}
 	}
 
