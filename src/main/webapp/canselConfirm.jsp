@@ -15,7 +15,7 @@
   <h2>キャンセル確認</h2>
   <form action="<%= request.getContextPath() %>/LoginServlet"method="post">
     
-    予約日       <input type="tate"name="reserveDate"value="yyyy-mm-dd"><br>
+    予約日       <input type="tate"name="reserve.date"value="yyyy-mm-dd"><br>
     会議室       <input type="text"name="room.name"value=""><br>
     予約開始時刻 <input type="time"name="reservation.start"value="hh:mm"><br>
     予約終了時刻 <input type="time"name="reservation.end"value="hh:mm"><br>
