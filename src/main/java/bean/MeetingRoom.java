@@ -29,7 +29,7 @@ public class MeetingRoom {
 		try {
 			this.rooms = RoomDao.findAll();
 		} catch (Exception e) {
-			System.err.println("MetingRoom->コンストラクタ : RoomDao.findAll()にて例外をキャッチしました\n"+e);
+			System.err.println("MetingRoom->コンストラクタ : RoomDao.findAll()にて例外をキャッチしました\n" + e);
 			this.rooms = null;
 		}
 	}
@@ -105,26 +105,26 @@ public class MeetingRoom {
 		try {
 			reservFromDB = ReservationDao.findByDate(this.date);
 		} catch (Exception e) {
-			System.err.println("MeetingRoom->getReservations(): ReservationDao.findByDate()にて例外をキャッチしました\n"+e); 
+			System.err.println("MeetingRoom->getReservations(): ReservationDao.findByDate()にて例外をキャッチしました\n" + e);
 			return null;
 		}
 		//返ってきたリストを1つづつ配列の対応する場所に格納
-		if(reservFromDB != null) {
-		for (ReservationBean row : reservFromDB) {
-			try {
-				reserve[this.roomIdIndex(row.getRoomId())][this.startPeriod(row.getStart())] = row;
-			} catch (IndexOutOfBoundsException e) {
-				//会議室が定義外などの場合の処理
-				System.err.println("例外が発生しました\n原因のReservationBean->" + row.toString() + "\n" + e);
-				continue;
+		if (reservFromDB != null) {
+			for (ReservationBean row : reservFromDB) {
+				try {
+					reserve[this.roomIdIndex(row.getRoomId())][this.startPeriod(row.getStart())] = row;
+				} catch (IndexOutOfBoundsException e) {
+					//会議室が定義外などの場合の処理
+					System.err.println("例外が発生しました\n原因のReservationBean->" + row.toString() + "\n" + e);
+					continue;
+				}
 			}
-		}
 		}
 		return reserve;
 	}
 
 	public ReservationBean createReservation(String roomId, String start) throws Exception {//予約情報生成
-		if(this.user == null) {
+		if (this.user == null) {
 			throw new Exception("未ログインです");
 		}
 		try {
@@ -177,15 +177,15 @@ public class MeetingRoom {
 		String room;
 		if (rooms == null) {
 			room = null;
-		}else {
+		} else {
 			room = "{\n";
 			for (RoomBean roomB : rooms) {
-				
-				room += ("\t\t"+roomB.toString() + "\n");
+
+				room += ("\t\t" + roomB.toString() + "\n");
 			}
 			room += "\t}";
 		}
-		
+
 		return "MeetingRoom {\n\tINTERVAL:" + INTERVAL + "\n\tPERIOD:" + period + "\n\tdate:" + date + "\n\tuser:"
 				+ user + "\n\tRoomBean:" + room + "\n}";
 	}
