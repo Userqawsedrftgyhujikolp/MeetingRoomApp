@@ -9,13 +9,13 @@
 <body>
 	<h1>会議室予約</h1>
 	<h2>メニュー</h2>
-	<form action="/reserveInput.jsp" method="post">
+	<form action="<%=request.getContextPath() %>/reserveInput.jsp" method="post">
 		<input type="submit" value="会議室予約">
 	</form>
-	<form action="/cancelInput.jsp" method="post">
+	<form action="<%=request.getContextPath() %>/cancelInput.jsp" method="post">
 		<input type="submit" value="予約キャンセル">
 	</form>
-	<form action="/Logout" method="post">
+	<form action="<%=request.getContextPath() %>/Logout" method="post">
 		<input type="submit" value="ログアウト">
 	</form>
 </body>
