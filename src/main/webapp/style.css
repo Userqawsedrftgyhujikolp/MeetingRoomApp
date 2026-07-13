@@ -1,0 +1,11 @@
+@charset "UTF-8";
+body {
+	text-align: center;
+	background: linear-gradient(to right,#e60000,#f39800,#fff100,#009944,#0068b7,#1d2088,#920783,#e60000 )0/200%;
+	    animation: 5s moves linear infinite;
+	    height: 80px;
+}
+@keyframes moves{
+	0%{ background-position: 0%;}
+    100% { background-position: 200%; }
+}
