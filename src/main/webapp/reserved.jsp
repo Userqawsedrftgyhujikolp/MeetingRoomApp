@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page cancelPage="menu.jsp"%>
+
     
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>予約成功を示す画面</title>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/style.css">
 </head>
 <h1>会議室予約</h1>
 <hr>
@@ -16,8 +17,7 @@
     予約ID		 <input type="number"name="reserve.id"value=""><br>
     予約日       <input type="tate"name="reserve.date"value="yyyy-mm-dd"><br>
     会議室名     <input type="text"name="room.name"value=""><br>
-    予約開始時刻 <input type="time"name="reservation.start"value="hh:mm"><br>
-    予約終了時刻 <input type="time"name="reservation.end"value="hh:mm"><br>
+    予約時刻     <input type="time"name="reservation.start","reservation.end"value="hh:mm"><br>
     予約者       <input type="text"name="meetingRoom.user.name"value=""><br>
 <hr>   
     <input type="submit"value="完了">

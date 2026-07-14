@@ -1,29 +1,48 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ page cancelPage="reserveInput.jsp"%>
-<%@ page cancelPage="Reserve"%>
-   
+
+<%@ page import="bean.ReservationBean" %>
+<%@ page import="bean.MeetingRoomBean" %>
+<%@ page import="bean.RoomBean" %>
+<%@ page import="bean.UserBean" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>予約内容を確認する画面</title>
+    <meta charset="UTF-8">
+    <title>予約確認画面</title>
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/style.css">
 </head>
-  <h1>会議室予約</h1>
-<hr>
-  <h2>予約確認</h2>
-  <form action="<%= request.getContextPath() %>/LoginServlet"method="post">
-    
-    予約日       <input type="tate"name="reserve.date"value="yyyy-mm-dd"><br>
-    会議室       <input type="text"name="room.name"value=""><br>
-    予約開始時刻 <input type="time"name="reservation.start"value="hh:mm"><br>
-    予約終了時刻 <input type="time"name="reservation.end"value="hh:mm"><br>
-    予約者       <input type="text"name="meetingRoom.user.name"value=""><br>
-<hr>   
-    <input type="submit"value="戻る">
-    <input type="submit"value="決定">
-  </form>
-<body>
+<body> <!-- ★修正：bodyの開始タグをここ（見出しの上）に移動 -->
 
-</body>
+    <h1>会議室予約</h1>
+    <hr>
+    <h2>予約確認</h2>
+    
+    <!-- ★修正：actionの送信先を、状況に応じて適切なURLに変更してください（詳細は解説にて） -->
+    <form action="<%= request.getContextPath() %>/LoginServlet" method="post">
+        
+        <!-- ★修正：tdタグはtableタグの中でしか使えないため、divやspanなどで綺麗に並べます -->
+        <div style="margin-bottom: 10px;">
+            <span style="display: inline-block; width: 100px;">予約日</span>
+            <span>${reservation.date}</span>
+        </div>
+        <div style="margin-bottom: 10px;">
+            <span style="display: inline-block; width: 100px;">会議室</span>
+            <span>${room.name}</span>
+        </div>
+        <div style="margin-bottom: 10px;">
+            <span style="display: inline-block; width: 100px;">予約時刻</span>
+            <span>${reservation.start}～${reservation.end}</span>
+        </div>
+        <div style="margin-bottom: 10px;">
+            <span style="display: inline-block; width: 100px;">予約者</span>
+            <span>${meetingRoom.user.name}</span>
+        </div>
+
+        <hr>   
+        
+        <!-- ★修正：「戻る」と「決定」で送信先や処理を変えるための調整が必要になる場合があります -->
+        <input type="submit" name="action" value="戻る">
+        <input type="submit" name="action" value="決定">
+    </form>
+
+</body> <!-- ★修正：bodyの閉じタグはここ -->
 </html>
