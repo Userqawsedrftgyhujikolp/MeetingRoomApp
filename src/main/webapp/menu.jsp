@@ -5,9 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>メニュー画面</title>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/style.css">
 </head>
 <body>
 	<h1>会議室予約</h1>
+	<hr>
 	<h2>メニュー</h2>
 	<form action="<%=request.getContextPath() %>/reserveInput.jsp" method="post">
 		<input type="submit" value="会議室予約">
