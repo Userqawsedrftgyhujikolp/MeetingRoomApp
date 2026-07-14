@@ -23,23 +23,14 @@ public class ReserveCreateServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		//		データを受信
 		HttpSession session = request.getSession();
-//		int yoyakuid = Integer.parseInt(request.getParameter("id"));
-//		String yoyakudate = request.getParameter("date");
 		String yoyakuroomId = request.getParameter("roomId");
 		String yoyakustart = request.getParameter("start");
-//		String yoyakuend = request.getParameter("end");
-//		String yoyakuuserId = request.getParameter("userId");
 		try {
-//			ReservationBean rb = new ReservationBean(yoyakuroomId, yoyakustart, yoyakuend,
-//					yoyakuuserId);
-			//		まずは予約を生成
-//			mr.createReservation(yoyakuroomId, yoyakustart);
-//			ReservationBean rb = mr.createReservation(yoyakuroomId, yoyakustart);
+			//	まずは予約を生成
 			//	値をセット
 			MeetingRoom mr = (MeetingRoom) session.getAttribute("meetingRoom");
 			ReservationBean rb = mr.createReservation(yoyakuroomId, yoyakustart);
 			//	予約が重複していないか(MeetingRoomにあるメソッドを使う。重複の確認)	
-//			mr.setDate(yoyakudate);
 			mr.reserve(rb);
 			RequestDispatcher rdp = request.getRequestDispatcher("reserveConfirm.jsp");
 			rdp.forward(request, response);
