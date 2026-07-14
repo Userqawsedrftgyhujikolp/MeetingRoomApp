@@ -44,6 +44,8 @@ public class ReserveCreateServlet extends HttpServlet {
 			RequestDispatcher rdp = request.getRequestDispatcher("reserveConfirm.jsp");
 			rdp.forward(request, response);
 		} catch (Exception e) {
+			System.out.println("---------------");
+			e.printStackTrace();
 			request.setAttribute("error", "予約できませんでした");
 			RequestDispatcher rdp = request.getRequestDispatcher("reserveError.jsp");
 			rdp.forward(request, response);
