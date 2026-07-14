@@ -30,12 +30,11 @@ public class ReserveCreateServlet extends HttpServlet {
 			//	値をセット
 			MeetingRoom mr = (MeetingRoom) session.getAttribute("meetingRoom");
 			ReservationBean rb = mr.createReservation(yoyakuroomId, yoyakustart);
-			//	予約が重複していないか(MeetingRoomにあるメソッドを使う。重複の確認)	
+			//	
 			mr.reserve(rb);
 			RequestDispatcher rdp = request.getRequestDispatcher("reserveConfirm.jsp");
 			rdp.forward(request, response);
 		} catch (Exception e) {
-			System.out.println("---------------");
 			e.printStackTrace();
 			request.setAttribute("error", "予約できませんでした");
 			RequestDispatcher rdp = request.getRequestDispatcher("reserveError.jsp");
