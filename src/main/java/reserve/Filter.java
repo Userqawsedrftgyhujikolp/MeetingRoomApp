@@ -41,23 +41,23 @@ public class Filter extends HttpFilter implements javax.servlet.Filter {
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		// TODO Auto-generated method stub
-		System.out.println("\nフィルタによるログインチェックが開始しました");
+//		System.out.println("\nフィルタによるログインチェックが開始しました");
 	    HttpServletRequest httpRequest = (HttpServletRequest) request;
 	    HttpServletResponse httpResponse = (HttpServletResponse) response;
 		String url = httpRequest.getRequestURI().substring(httpRequest.getContextPath().length());
 	    if (url.equals("/login.jsp") || url.endsWith(".css") || url.equals("/Login")) {
-	    	System.out.println("urlが指定の形式のためパスします");
+//	    	System.out.println("urlが指定の形式のためパスします");
 	        chain.doFilter(request, response);
 	        return;
 	    }
 	    HttpSession session = httpRequest.getSession();
 	    MeetingRoom mr = (MeetingRoom)session.getAttribute("meetingRoom");
 	    if(mr == null || mr.getUser() == null ){
-	    	System.out.println("未ログインのためligin.jspへリダイレクトします");
+//	    	System.out.println("未ログインのためligin.jspへリダイレクトします");
 	    	httpResponse.sendRedirect(httpRequest.getContextPath()+"/login.jsp");
 	    	return;
 	    }else {
-	    	System.out.println("ログイン中のためパスします");
+//	    	System.out.println("ログイン中のためパスします");
 	    	chain.doFilter(request, response);
 	    	return;
 	    }
