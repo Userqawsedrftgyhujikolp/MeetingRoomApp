@@ -168,6 +168,17 @@ public class MeetingRoom {
 		}
 	}
 
+	public String htmlspecialchars(String str) {
+		if (str != null) {
+			str = str.replace("&", "&amp;");
+			str = str.replace("<", "&lt;");
+			str = str.replace(">", "&gt;");
+			str = str.replace("\'", "&apos;");
+			str = str.replace("\"", "&quot;");
+		}
+		return str;
+	}
+
 	public String toString() {//toString
 		String period = "{";
 		for (String str : PERIOD) {
