@@ -13,6 +13,7 @@
 <title>キャンセル入力画面</title>
 </head>
 <body>
+
 	<h1>会議室予約キャンセル</h1><br>
 	<h2>利用日</h2>
 	<input type = "date" id = "date" value = "<%= mr.getDate() %>"/>
@@ -30,11 +31,17 @@
 		<tr> 
 		<th><%= rb[r].getName() %></th>
 		<% for (int p = 0 ; p < reserve[r].length ; p++){ %>
-			<td><%= reserve[r][p] %> </td>
+			<td>
+			<% if(rserve[r][p] != null){ %> 
+			
+			<% } else { %>
+			
+			<% }%>
+		</td>
 		<% }%>
 		</tr>
 	<% } %>
-	<p>　部屋の数: <%= reserve.length %> /時間の数: <%= reserve[0].length %></p>
+	<p> 部屋の数: <%= reserve.length %> /時間の数: <%= reserve[0].length %></p>
 	
 	</table>
 </body>
