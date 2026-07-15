@@ -3,12 +3,14 @@
     <%@ page import = "bean.MeetingRoom" %>
     <%@ page import = "bean.ReservationBean" %>
     <%@ page import = "bean.RoomBean" %>
+    <%@ page import = "bean.Util" %>
     <% MeetingRoom mr = (MeetingRoom)session.getAttribute("meetingRoom"); %>
     <% ReservationBean[][] reserve = mr.getReservations(); %>
     <% RoomBean[] rb = mr.getRooms(); %>
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/style.css">
 <meta charset="UTF-8">
 <title>キャンセル入力画面</title>
 </head>
@@ -23,7 +25,7 @@
 
 	</form>
 	
-	<h2>キャンセル可能時間帯(<%= mr.getUser().getName() %>)</h2>
+	<h2>キャンセル可能時間帯(<%= Util.htmlSpecialChars(mr.getUser().getName()) %>)</h2>
 <table>
 	<tr>
 		<td>会議室名\時間帯</td>
@@ -35,18 +37,18 @@
 	</tr>
 	    <% for(int r = 0 ; r < reserve.length ; r++){%>
 		<tr> 
-		<th><%= rb[r].getName() %></th>
+		<th><%= Util.htmlSpecialChars(rb[r].getName()) %></th>
 		<% for (int p = 0 ; p < reserve[r].length ; p++){ %>
 			<td>
-			<% if(reserve[r][p] != null){ %> 
+			<% if(reserve[r][p] != null && reserve[r][p].getUserId().equals(mr.getUser().getId())){ %> 
 			<form action = "<%= request.getContextPath() %>/CancelCreateServlet" method = "post">
-			<input type = "hidden" name = "roomId" value = "<%= rb[r].getId() %>">
-			<input type = "hidden" name = "time" value = "<%= jikan[p] %>">
+			<input type = "hidden" name = "roomId" value = "<%= r %>">
+			<input type = "hidden" name = "time" value = "<%= p %>">
 			<input type = "submit" value = "<%= jikan[p] %>">
 			</form>
 			
 			<% } else { %>
-			<input type = "submit" value = "<%= jikan[p] %>" disabled>
+			<input type = "button" value = "<%= jikan[p] %>" disabled>
 			<% }%>
 		 </td>
 		<% }%>

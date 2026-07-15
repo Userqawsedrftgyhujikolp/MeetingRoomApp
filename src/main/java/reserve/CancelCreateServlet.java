@@ -44,8 +44,11 @@ public class CancelCreateServlet extends HttpServlet {
 	rd.forward(request, response);
 	
 	}catch (Exception e) {
+		System.out.println("-------------");
+		System.err.println(e);
+		System.out.println("-------------");
 	    request.setAttribute("error", "エラーです");
-	    RequestDispatcher rdp = request.getRequestDispatcher("cancelError.jsp");
+	    RequestDispatcher rdp = request.getRequestDispatcher(request.getContextPath()+"/cancelError.jsp");
 		rdp.forward(request, response);
 	
 	}
