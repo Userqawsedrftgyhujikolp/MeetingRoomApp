@@ -30,15 +30,17 @@ public class ReservationServlet extends HttpServlet {
 		String yoyakuend = request.getParameter("end");
 		String yoyakuuserId = request.getParameter("userId");
 		try {
-			ReservationBean rb = new ReservationBean(yoyakuid, yoyakudate, yoyakuroomId, yoyakustart, yoyakuend,yoyakuuserId);
+			ReservationBean rb = new ReservationBean(yoyakuid, yoyakudate, yoyakuroomId, yoyakustart, yoyakuend,
+					yoyakuuserId);
 			MeetingRoom mr = new MeetingRoom();
-			//メソッドを呼び出す
+			//予約実行のメソッドを呼び出す
 			mr.reserve(rb);
 			session.setAttribute("yoyaku", rb);
 			session.setAttribute("jikan", mr);
 			//画面遷移先を指定
 			RequestDispatcher rdp = request.getRequestDispatcher("reserveConfirm.jsp");
 			rdp.forward(request, response);
+			session.removeAttribute("reservation");
 		} catch (Exception e) {
 			request.setAttribute("error", "予約できませんでした");
 			RequestDispatcher rdp = request.getRequestDispatcher("reserveConfirm.jsp");
