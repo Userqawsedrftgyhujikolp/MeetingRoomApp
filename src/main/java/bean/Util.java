@@ -34,7 +34,7 @@ public class Util {
 		if (str.length() <= length) {
 			return str;
 		} else {
-			return str.substring(0, (length -1)) + "…";
+			return "<span title=\""+str+"\">"+str.substring(0, (length -1)) + "…</span>";
 		}
 	}
 	
