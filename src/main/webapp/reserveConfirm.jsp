@@ -26,7 +26,7 @@
         </div>
         <div style="margin-bottom: 10px;">
             <span style="display: inline-block; width: 100px;">会議室</span>
-            <span>${room.name}</span>
+            <span>${reservation.id}</span>
         </div>
         <div style="margin-bottom: 10px;">
             <span style="display: inline-block; width: 100px;">予約時刻</span>
