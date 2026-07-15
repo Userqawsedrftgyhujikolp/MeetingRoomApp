@@ -40,6 +40,7 @@ public class ReservationServlet extends HttpServlet {
 			//画面遷移先を指定
 			RequestDispatcher rdp = request.getRequestDispatcher("reserveConfirm.jsp");
 			rdp.forward(request, response);
+			session.removeAttribute("reservation");
 		} catch (Exception e) {
 			request.setAttribute("error", "予約できませんでした");
 			RequestDispatcher rdp = request.getRequestDispatcher("reserveConfirm.jsp");
