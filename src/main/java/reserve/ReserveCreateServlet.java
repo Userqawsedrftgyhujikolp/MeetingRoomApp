@@ -27,20 +27,20 @@ public class ReserveCreateServlet extends HttpServlet {
 		String yoyakustart = request.getParameter("start");
 		try {
 			//	まずは予約を生成
-			//	値をセット
+			//	値をセット(まだ確定はしない)
 			MeetingRoom mr = (MeetingRoom) session.getAttribute("meetingRoom");
 			ReservationBean rb = mr.createReservation(yoyakuroomId, yoyakustart);
-			//	
-			mr.reserve(rb);
+			//セッション属性に入れて、予約確定画面へフォワード
+			session.setAttribute("Reservation", rb);
 			RequestDispatcher rdp = request.getRequestDispatcher("reserveConfirm.jsp");
 			rdp.forward(request, response);
+			session.removeAttribute("Reservation");
 		} catch (Exception e) {
 			e.printStackTrace();
 			request.setAttribute("error", "予約できませんでした");
 			RequestDispatcher rdp = request.getRequestDispatcher("reserveError.jsp");
 			rdp.forward(request, response);
 		}
-		
 
 	}
 }
