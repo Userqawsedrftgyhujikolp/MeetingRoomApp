@@ -9,23 +9,22 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/style.css">
 <title>予約エラー画面</title>
 </head>
 <body>
 <h1>会議室予約</h1>
 <hr>
 <h2>予約エラー</h2>
-	${error }
-  <form action="<%= request.getContextPath() %>/LoginServlet"method="post">
-    エラーメッセージ<br>
-    予約日       <input type="tate"name="reserve.date"value="yyyy-mm-dd"><br>
-    会議室名     <input type="text"name="room.name"value=""><br>
-    予約開始時刻 <input type="time"name="reservation.start"value="hh:mm"><br>
-    予約終了時刻 <input type="time"name="reservation.end"value="hh:mm"><br>
-    予約者       <input type="text"name="meetingRoom.user.name"value=""><br>
+	
+    ${error }<br>
+    予約日       ${reservation.date }<br>
+    会議室名     ${Util.htmlSpecialChars(meetingRoom.getRoom(reservation.roomId).name) }<br>
+    予約時刻 ${reservation.start } ～ ${reservation.end }<br>
+    予約者       ${Util.htmlSpecialChars(meetingRoom.user.name) }<br>
 <hr>   
+  <form action="<%= request.getContextPath() %>/menu.jsp"method="post">
     <input type="submit"value="確認">
-    
   </form>
 
 </body>
