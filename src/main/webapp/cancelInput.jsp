@@ -16,7 +16,13 @@
 
 	<h1>会議室予約キャンセル</h1><br>
 	<h2>利用日</h2>
+	<form action = "<%= request.getComtextPath() %>/ChangeDate" method = "post">
+	<input type = "date" name ="date" value = "<%= meetingRoom.getDate() %>">
+	<input type = "hidden" name = "page" value ="cancelInput.jsp">
+	<input type = "subnit" value = "日付変更"
+	</form>
 	<input type = "date" id = "date" value = "<%= mr.getDate() %>"/>
+	
 	<h2>キャンセル可能時間帯(<%= mr.getUser().getName() %>)</h2>
 <table>
 	<tr>
@@ -33,15 +39,19 @@
 		<% for (int p = 0 ; p < reserve[r].length ; p++){ %>
 			<td>
 			<% if(rserve[r][p] != null){ %> 
+			<form action = "<%= request.getContextPath() %>/CancelCreat.jsp" method = "post">
+			<input type = "hidden" name = "roomId" value = "<%= rooms[r].getId() %>">
+			<input type = "submit" name = "time" value = "<%= period[p] %>">
+			</form>
 			
 			<% } else { %>
-			
+			<input type = "submit" value = "<%=period[p] %>" disabled>
 			<% }%>
 		</td>
 		<% }%>
 		</tr>
 	<% } %>
-	<p> 部屋の数: <%= reserve.length %> /時間の数: <%= reserve[0].length %></p>
+	
 	
 	</table>
 </body>
