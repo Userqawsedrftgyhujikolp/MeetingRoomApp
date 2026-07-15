@@ -42,8 +42,8 @@
 			<td>
 			<% if(reserve[r][p] != null && reserve[r][p].getUserId().equals(mr.getUser().getId())){ %> 
 			<form action = "<%= request.getContextPath() %>/CancelCreateServlet" method = "post">
-			<input type = "hidden" name = "roomId" value = "<%= rb[r].getId() %>">
-			<input type = "hidden" name = "time" value = "<%= jikan[p] %>">
+			<input type = "hidden" name = "roomId" value = "<%= r %>">
+			<input type = "hidden" name = "time" value = "<%= p %>">
 			<input type = "submit" value = "<%= jikan[p] %>">
 			</form>
 			

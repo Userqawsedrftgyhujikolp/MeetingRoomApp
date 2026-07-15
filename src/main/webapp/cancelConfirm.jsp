@@ -6,7 +6,7 @@
 <%@ page import="bean.UserBean"%>
 <%@ page import="bean.Util"%>
 <%
-
+	System.out.println("canselConfirm");
 %>
 <!DOCTYPE html>
 <html>
@@ -22,15 +22,15 @@
     <table>
     	<tr>
     		<th>予約日</td>
-    		<td>${yayaku.date}></td>
+    		<td>${yayaku.date}</td>
     	</tr>
     	<tr>
     		<th>会議室名</td>
-    		<td>${Util.htmlSpecialChars(meetingRoom.getRoom(yayaku.roomId).name)}</td>
+    		<td>${Util.htmlSpecialChars(heya.name)}</td>
     	</tr>
     	<tr>
     		<th>予約時刻</th>
-    		<td>${reservation.start} ～ ${reservation.end}</td>
+    		<td>${yayaku.start} ～ ${yayaku.end}</td>
     	</tr>
     	<tr>
     		<th>予約者</th>
