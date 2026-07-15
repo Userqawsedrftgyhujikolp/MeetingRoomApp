@@ -39,7 +39,7 @@ public class CancelServlet extends HttpServlet {
 		
 		session.setAttribute("yoyaku",rb);
 		session.setAttribute("jikan",mr);
-		
+		session.getAttribute("yoyaku",reserveB);
 		RequestDispatcher rdp = request.getRequestDispatcher("cancel.jsp");
 		rdp.forward(request, response);
 		
