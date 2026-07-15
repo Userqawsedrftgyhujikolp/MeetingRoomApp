@@ -1,8 +1,10 @@
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="bean.MeetingRoom" %>
 <%@ page import="bean.ReservationBean" %>
-<%@ page import="bean.MeetingRoomBean" %>
 <%@ page import="bean.RoomBean" %>
 <%@ page import="bean.UserBean" %>
+<%@ page import="bean.Util"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,11 +13,9 @@
     <link rel="stylesheet" href="<%=request.getContextPath() %>/style.css">
 </head>
 <body> <!-- ★修正：bodyの開始タグをここ（見出しの上）に移動 -->
-
     <h1>会議室予約</h1>
     <hr>
     <h2>予約確認</h2>
-    
     <!-- ★修正：actionの送信先を、状況に応じて適切なURLに変更してください（詳細は解説にて） -->
     <form action="<%= request.getContextPath() %>/LoginServlet" method="post">
         
