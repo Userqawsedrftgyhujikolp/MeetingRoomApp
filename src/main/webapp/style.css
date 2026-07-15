@@ -10,3 +10,11 @@ body {
     100% { background-position: 200%; }
 }
 
+.marginbottom{
+	margin-bottom: 10px;
+}
+
+.display{
+	display: inline-block;
+	width: 100px;
+}
