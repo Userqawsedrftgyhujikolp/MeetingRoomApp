@@ -32,15 +32,17 @@ public class CancelServlet extends HttpServlet {
 		String end = request.getParameter("end");
 		String userId = request.getParameter("userId"); 
 	try {
-		ReservationBean rb = new ReservationBean(id,roomId,date,start,end,userId);
-		MeetingRoom mr = new MeetingRoom();
-		mr.cancel(rb);
-		
-		
-		session.setAttribute("yoyaku",rb);
+		//セッションから持ってきた object型から他の型に変える方法
+		// = (ここに変更したい型)のあとに変更したい型名入れる
+		MeetingRoom mr = (MeetingRoom)session.getAttribute("meetingRoom");
+		ReservationBean reserveB = (ReservationBean)session.getAttribute("yoyaku");
+		mr.cancel(reserveB);
+		//セッション保存
 		session.setAttribute("jikan",mr);
+		//キャンセル生成から貰った
+		session.getAttribute("yoyaku");
 		
-		RequestDispatcher rdp = request.getRequestDispatcher("cancel.jsp");
+		RequestDispatcher rdp = request.getRequestDispatcher("canceled.jsp");
 		rdp.forward(request, response);
 		
 	}catch (Exception e) {
