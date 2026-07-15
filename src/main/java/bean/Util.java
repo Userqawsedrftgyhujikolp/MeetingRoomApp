@@ -1,8 +1,8 @@
 package bean;
 
 public class Util {
-	private Util() {}
-	
+	private Util() {/*Utilのインスタンス化はさせません*/}
+
 	public static String htmlSpecialChars(String str) {
 		if (str != null) {
 			str = str.replace("&", "&amp;");
@@ -13,12 +13,15 @@ public class Util {
 		}
 		return str;
 	}
-	
+
 	public static String cropString(String str) {
-		String shortStr = "";
-		if(str != null) {
-			
+		if(str == null) {
+			return null;
 		}
-		return shortStr = "";
+		if (str.length() <= 7) {
+			return str;
+		} else {
+			return str.substring(0, 6) + "…";
+		}
 	}
 }
