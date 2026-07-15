@@ -1,8 +1,14 @@
 package bean;
 
 public class Util {
-	private Util() {}
-	
+	private Util() {/*Utilのインスタンス化はさせません*/}
+
+	/**
+	 * 引数として与えられた文字列に含まれる & < > ' " をHTMLの実態文字参照に置き換えます。
+	 * 引数がnull値の場合は戻り値はnullとなります。
+	 * @param String str 変化させたい文字列
+	 * @return String 変換させた文字列
+	 */
 	public static String htmlSpecialChars(String str) {
 		if (str != null) {
 			str = str.replace("&", "&amp;");
@@ -14,11 +20,21 @@ public class Util {
 		return str;
 	}
 	
+	/**
+	 * 引数として与えられた文字列を7文字まで減らします
+	 * 引数が7文字以下の場合はそのまま、8文字以上の場合は6文字目の後に"…"を入れ以降を削除します	 
+	 * @param String str 短縮させたい文字列
+	 * @return String 短縮後の文字列
+	 */
 	public static String cropString(String str) {
-		String shortStr = "";
-		if(str != null) {
-			
+		if(str == null) {
+			return null;
 		}
-		return shortStr = "";
+		if (str.length() <= 7) {
+			return str;
+		} else {
+			return str.substring(0, 6) + "…";
+		}
 	}
+	
 }
