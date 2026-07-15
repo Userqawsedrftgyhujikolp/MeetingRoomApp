@@ -73,7 +73,7 @@ public class MeetingRoom {
 	
 	/**
 	 * 引数として与えられた文字列と同じIDを持つ会議室を返します
-	 * @param roomId 取得したい会議室のID
+	 * @param String roomId 取得したい会議室のID
 	 * @return RoomBean IDが一致する会議室・見つからなければnull
 	 */
 	public RoomBean getRoom(String roomId) {//会議室IDから会議室取得
@@ -96,7 +96,7 @@ public class MeetingRoom {
 
 	/**
 	 * 利用する日付を設定します
-	 * @param date 設定したい日付（yyyy-MM-dd）
+	 * @param String date 設定したい日付（yyyy-MM-dd）
 	 * @throws IllegalArgumentException yyyy-MM-dd形式以外の文字列が渡された場合
 	 */
 	public void setDate(String date) throws IllegalArgumentException {//閲覧・利用する時刻設定
@@ -117,8 +117,8 @@ public class MeetingRoom {
 
 	/**
 	 * 引数として与えられたIDとパスワードをデータベースと照合し一致するものが見つかった場合、そのユーザーを自身にセットします
-	 * @param id ユーザーID
-	 * @param password パスワード
+	 * @param String id ユーザーID
+	 * @param String password パスワード
 	 * @return true ログイン成功 / false ログイン失敗
 	 */
 	public boolean login(String id, String password) {//ログイン
@@ -160,8 +160,8 @@ public class MeetingRoom {
 	}
 	/**
 	 * 引数として与えられた情報を基に予約情報を生成します
-	 * @param roomId 会議室ID
-	 * @param start 利用開始時刻
+	 * @param String roomId 会議室ID
+	 * @param String start 利用開始時刻
 	 * @return ReservationBean 生成した予約情報
 	 * @throws Exception startがHH:mm形式でない場合
 	 */
@@ -180,7 +180,7 @@ public class MeetingRoom {
 	
 	/**
 	 * 引数として与えられた予約情報を基に、それをデータベースに登録します
-	 * @param reservation 登録する予約情報
+	 * @param ReservationBean reservation 登録する予約情報
 	 * @throws Exception 過去の時間に予約を入れようとした場合 / 日時と使用会議室が同じ予約が既にある場合
 	 */
 	public void reserve(ReservationBean reservation) throws Exception {//予約実行
@@ -201,7 +201,7 @@ public class MeetingRoom {
 
 	/**
 	 * 引数として与えられた予約情報を基に、それをデータベースから削除します
-	 * @param reservation キャンセルする予約情報
+	 * @param ReservationBean reservation キャンセルする予約情報
 	 * @throws Exception 過去の予約をキャンセルしようとした場合 / キャンセルする予約がない場合
 	 */
 	public void cancel(ReservationBean reservation) throws Exception {//キャンセル実行
