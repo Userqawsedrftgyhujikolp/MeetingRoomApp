@@ -32,9 +32,10 @@ public class CancelServlet extends HttpServlet {
 		String end = request.getParameter("end");
 		String userId = request.getParameter("userId"); 
 	try {
-		//セッションから持ってきたぞ
+		//セッションから持ってきた object型から他の型に変える方法
+		// = (ここに変更したい型)のあとに変更したい型名入れる
 		MeetingRoom mr = (MeetingRoom)session.getAttribute("meetingRoom");
-		ReservationBean reserveB = reserve[roomId][time];
+		ReservationBean reserveB = (ReservationBean)session.getAttribute("yoyaku");
 		mr.cancel(reserveB);
 		//セッション保存
 		session.setAttribute("jikan",mr);
