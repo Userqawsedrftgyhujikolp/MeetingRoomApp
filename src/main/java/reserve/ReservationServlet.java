@@ -23,27 +23,19 @@ public class ReservationServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		//データを受信
 		HttpSession session = request.getSession();
-		int yoyakuid = Integer.parseInt(request.getParameter("id"));
-		String yoyakudate = request.getParameter("date");
-		String yoyakuroomId = request.getParameter("roomId");
-		String yoyakustart = request.getParameter("start");
-		String yoyakuend = request.getParameter("end");
-		String yoyakuuserId = request.getParameter("userId");
 		try {
-			ReservationBean rb = new ReservationBean(yoyakuid, yoyakudate, yoyakuroomId, yoyakustart, yoyakuend,
-					yoyakuuserId);
-			MeetingRoom mr = new MeetingRoom();
+			ReservationBean rb = (ReservationBean) session.getAttribute("reservation");
+			MeetingRoom mr = (MeetingRoom)session.getAttribute("meetingRoom");
 			//予約実行のメソッドを呼び出す
 			mr.reserve(rb);
 			session.setAttribute("yoyaku", rb);
-			session.setAttribute("jikan", mr);
 			//画面遷移先を指定
 			RequestDispatcher rdp = request.getRequestDispatcher("reserveConfirm.jsp");
 			rdp.forward(request, response);
 			session.removeAttribute("reservation");
 		} catch (Exception e) {
-			request.setAttribute("error", "予約できませんでした");
-			RequestDispatcher rdp = request.getRequestDispatcher("reserveConfirm.jsp");
+			request.setAttribute("error", "予約できませんでした"+e);
+			request.getRequestDispatcher("reserveError.jsp").forward(request, response);;
 		}
 	}
 }

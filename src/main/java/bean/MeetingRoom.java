@@ -54,15 +54,28 @@ public class MeetingRoom {
 		throw new IndexOutOfBoundsException("配列に存在しない時刻が入力されました");
 
 	}
-
+	
+	/**
+	 * 利用時間の一覧が入った配列を返します
+	 * @return String[] 利用時刻の文字列が入った配列
+	 */
 	public static String[] getPeriod() {//利用時刻取得
 		return PERIOD;
 	}
 
+	/**
+	 * 会議室の一覧が入った取得を返します
+	 * @return RoomBean[] 会議室(RoomBean型)が入った配列
+	 */
 	public RoomBean[] getRooms() {//全ての会議室を取得
 		return rooms;
 	}
-
+	
+	/**
+	 * 引数として与えられた文字列と同じIDを持つ会議室を返します
+	 * @param String roomId 取得したい会議室のID
+	 * @return RoomBean IDが一致する会議室・見つからなければnull
+	 */
 	public RoomBean getRoom(String roomId) {//会議室IDから会議室取得
 		RoomBean roomForReturn = null;
 		for (RoomBean room : rooms) {
@@ -72,11 +85,20 @@ public class MeetingRoom {
 		}
 		return roomForReturn;
 	}
-
+	
+	/**
+	 * 現在の設定されている利用日を返します
+	 * @return String 現在の利用日（yyyy-MM-dd）
+	 */
 	public String getDate() {////閲覧・利用する時刻取得
 		return date;
 	}
 
+	/**
+	 * 利用する日付を設定します
+	 * @param String date 設定したい日付（yyyy-MM-dd）
+	 * @throws IllegalArgumentException yyyy-MM-dd形式以外の文字列が渡された場合
+	 */
 	public void setDate(String date) throws IllegalArgumentException {//閲覧・利用する時刻設定
 		if (date.matches("[0-9]{4}-[0-9]{2}-[0-9]{2}")) {
 			this.date = date;
@@ -84,11 +106,21 @@ public class MeetingRoom {
 			throw new IllegalArgumentException("正しくない日付が入力されました");
 		}
 	}
-
+	
+	/**
+	 * 現在ログインしているユーザーを返します
+	 * @return UserBean 利用しているユーザー
+	 */
 	public UserBean getUser() {//ログイン中のユーザー取得
 		return user;
 	}
 
+	/**
+	 * 引数として与えられたIDとパスワードをデータベースと照合し一致するものが見つかった場合、そのユーザーを自身にセットします
+	 * @param String id ユーザーID
+	 * @param String password パスワード
+	 * @return true ログイン成功 / false ログイン失敗
+	 */
 	public boolean login(String id, String password) {//ログイン
 		UserBean user = UserDao.certificate(id, password);
 		if (user == null) {
@@ -99,6 +131,10 @@ public class MeetingRoom {
 		}
 	}
 
+	/**
+	 * 現在の利用日の予約の一覧が入った配列を返します
+	 * @return ReservationBean[][] 予約一覧[会議室][時刻]
+	 */
 	public ReservationBean[][] getReservations() {//会議室ごとの予約状況 ReservationBean[会議室][時間ごとの予約状況]
 		ReservationBean[][] reserve = new ReservationBean[rooms.length][PERIOD.length];
 		List<ReservationBean> reservFromDB;
@@ -122,7 +158,13 @@ public class MeetingRoom {
 		}
 		return reserve;
 	}
-
+	/**
+	 * 引数として与えられた情報を基に予約情報を生成します
+	 * @param String roomId 会議室ID
+	 * @param String start 利用開始時刻
+	 * @return ReservationBean 生成した予約情報
+	 * @throws Exception startがHH:mm形式でない場合
+	 */
 	public ReservationBean createReservation(String roomId, String start) throws Exception {//予約情報生成
 		if (this.user == null) {
 			throw new Exception("未ログインです");
@@ -135,7 +177,12 @@ public class MeetingRoom {
 			throw new IllegalArgumentException("正しくない時刻が入力されました");
 		}
 	}
-
+	
+	/**
+	 * 引数として与えられた予約情報を基に、それをデータベースに登録します
+	 * @param ReservationBean reservation 登録する予約情報
+	 * @throws Exception 過去の時間に予約を入れようとした場合 / 日時と使用会議室が同じ予約が既にある場合
+	 */
 	public void reserve(ReservationBean reservation) throws Exception {//予約実行
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		//現在時刻の取得
@@ -152,6 +199,11 @@ public class MeetingRoom {
 		}
 	}
 
+	/**
+	 * 引数として与えられた予約情報を基に、それをデータベースから削除します
+	 * @param ReservationBean reservation キャンセルする予約情報
+	 * @throws Exception 過去の予約をキャンセルしようとした場合 / キャンセルする予約がない場合
+	 */
 	public void cancel(ReservationBean reservation) throws Exception {//キャンセル実行
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		//現在時刻の取得
@@ -164,7 +216,7 @@ public class MeetingRoom {
 		if (ReservationDao.delete(reservation)) {
 			return;
 		} else {
-			throw new Exception("既にキャンセルされています");
+			throw new Exception("キャンセルする予約がありません");
 		}
 	}
 
