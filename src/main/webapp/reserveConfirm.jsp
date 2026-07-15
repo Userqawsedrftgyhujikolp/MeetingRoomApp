@@ -24,7 +24,7 @@
         </div>
         <div style="margin-bottom: 10px;">
             <span style="display: inline-block; width: 100px;">会議室</span>
-            <span><%= Util.htmlSpecialChars()%></span>
+            <span> ${Util.htmlSpecialChars(meetingRoom.getRoom(reservation.roomId).name) }</span>
         </div>
         <div style="margin-bottom: 10px;">
             <span style="display: inline-block; width: 100px;">予約時刻</span>
@@ -32,14 +32,12 @@
         </div>
         <div style="margin-bottom: 10px;">
             <span style="display: inline-block; width: 100px;">予約者</span>
-            <span>${meetingRoom.user.name}</span>
+            <span>${Util.htmlSpecialChars(meetingRoom.user.name) }</span>
         </div>
-
         <hr>   
-        
-        <input type="submit" name="action" value="戻る">
-        <input type="submit" name="action" value="決定">
-    </form>
-
+        <form action="reserveInput.jsp"><input type="submit"value="戻る"></form>
+        <form action="<%=request.getContextPath()%>/ReservationServlet" method="post">
+        <input type="submit"value="決定">
+        </form>
 </body>
 </html>

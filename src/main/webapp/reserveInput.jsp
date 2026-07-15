@@ -24,7 +24,7 @@
 	<input type="submit" id="date" value="日付変更" />
 	</form>
 	<h2>
-		予約可能時間(<%=mr.getUser().getName()%>)
+		予約可能時間(${Util.htmlSpecialChars(meetingRoom.user.name)})
 	</h2>
 </form>
 <table>

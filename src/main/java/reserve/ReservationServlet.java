@@ -17,7 +17,7 @@ import bean.ReservationBean;
 public class ReservationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		//リクエストで受信した文字をUTF-8文字コードで受信する
 		request.setCharacterEncoding("UTF-8");
@@ -30,7 +30,7 @@ public class ReservationServlet extends HttpServlet {
 			mr.reserve(rb);
 			session.setAttribute("yoyaku", rb);
 			//画面遷移先を指定
-			RequestDispatcher rdp = request.getRequestDispatcher("reserveConfirm.jsp");
+			RequestDispatcher rdp = request.getRequestDispatcher("reserved.jsp");
 			rdp.forward(request, response);
 			session.removeAttribute("reservation");
 		} catch (Exception e) {
