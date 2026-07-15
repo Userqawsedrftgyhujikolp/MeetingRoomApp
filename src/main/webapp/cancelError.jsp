@@ -19,8 +19,8 @@
 	<form action="<%=request.getContextPath()%>/LoginServlet"
 		method="post">
 		<input type="label"value="errorReason"><br>
-		予約日 <<br>
-		会議室名 <input type="text" name="room.name" value=""><br>
+		予約日 <%= session.yoyaku %><br>
+		会議室 <input type="text" name="room.name" value=""><br>
 		予約時刻 <input type="time" name="reservation.start","reservation.end" value="hh:mm"><br>
 		予約者 <input type="text" name="meetingRoom.user.name" value=""><br>
 		<hr>

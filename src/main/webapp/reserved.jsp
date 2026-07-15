@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ page import="bean.MeetingRoom"%>
 <%@ page import="bean.ReservationBean"%>
 <%@ page import="bean.RoomBean"%>
@@ -9,24 +9,53 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>予約成功を示す画面</title>
+<title>予約確定画面</title>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css">
 </head>
 <h1>会議室予約</h1>
 <hr>
 <h2>予約完了</h2>
 
-  <form action="<%= request.getContextPath() %>/LoginServlet"method="post">
-    予約ID		 <input type="number"name="reserve.id"value=""><br>
-    予約日       <input type="tate"name="reserve.date"value="yyyy-mm-dd"><br>
-    会議室名     <input type="text"name="room.name"value=""><br>
-    予約時刻     <input type="time"name="reservation.start","reservation.end"value="hh:mm"><br>
-    予約者       <input type="text"name="meetingRoom.user.name"value=""><br>
-<hr>   
-    <input type="submit"value="完了">
-    
-  </form>
+<form action="<%=request.getContextPath()%>/LoginServlet" method="post">
+
+	
+		<table class="reserve-table">
+			<tr>
+				<td class="display">予約ＩＤ</td>
+				<td>${reservation.id}</td>
+			</tr>
+			<tr>
+				<td class="display">予約日</td>
+				<td>${reservation.date}</td>
+			</tr>
+			<tr>
+				<td class="display">会議室</td>
+				<td>${Util.htmlSpecialChars(meetingRoom.getRoom(reservation.roomId).name)}</td>
+			</tr>
+			<tr>
+				<td class="display">予約時刻</td>
+				<td>${reservation.start}～${reservation.end}</td>
+			</tr>
+			<tr>
+				<td class="display">予約者</td>
+				<td>${meetingRoom.user.name}</td>
+			</tr>
+		</table>
+	
+	<hr>
+	<input type="submit" value="完了">
+
+</form>
 <body>
 
 </body>
 </html>
+<<%-- div class="marginbottom"> <table class="reserve-table"> <tr> <td
+class="display">予約ＩＤ</td> <td>${reservation.id}</td> </tr> <tr> <td
+class="display">予約日</td> <td>${reservation.date}</td> </tr> <tr> <td
+class="display">会議室</td>
+<td>${Util.htmlSpecialChars(meetingRoom.getRoom(reservation.roomId).name)}</td>
+</tr> <tr> <td class="display">予約時刻</td>
+<td>${reservation.start}～${reservation.end}</td> </tr> <tr> <td
+class="display">予約者</td> <td>${meetingRoom.user.name}</td> </tr>
+</table> </div> --%>
