@@ -22,18 +22,19 @@ public class Util {
 	
 	/**
 	 * 引数として与えられた文字列を7文字まで減らします
-	 * 引数が7文字以下の場合はそのまま、8文字以上の場合は6文字目の後に"…"を入れ以降を削除します	 
+	 * 引数が6文字以下の場合はそのまま、7文字以上の場合は5文字目の後に"…"を入れ以降を削除します	 
 	 * @param String str 短縮させたい文字列
 	 * @return String 短縮後の文字列
 	 */
 	public static String cropString(String str) {
+		int length = 6;
 		if(str == null) {
 			return null;
 		}
-		if (str.length() <= 7) {
+		if (str.length() <= length) {
 			return str;
 		} else {
-			return str.substring(0, 6) + "…";
+			return str.substring(0, (length -1)) + "…";
 		}
 	}
 	
