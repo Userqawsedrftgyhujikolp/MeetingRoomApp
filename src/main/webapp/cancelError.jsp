@@ -16,19 +16,7 @@
 	<h1>会議室予約キャンセル</h1>
 	<hr>
 	<h2>キャンセルエラー</h2>
-<<<<<<< HEAD
-<<<<<<< HEAD
-	<form action="<%=request.getContextPath()%>/LoginServlet"
-		method="post">
-		<input type="label"value="errorReason"><br>
-		予約日 <%= session.yoyaku %><br>
-		会議室 <input type="text" name="room.name" value=""><br>
-		予約時刻 <input type="time" name="reservation.start","reservation.end" value="hh:mm"><br>
-		予約者 <input type="text" name="meetingRoom.user.name" value=""><br>
-=======
-=======
 	<div class="error">${error }</div>
->>>>>>> main
     <table>
     	<tr>
     		<th>予約日</td>
@@ -36,7 +24,7 @@
     	</tr>
     	<tr>
     		<th>会議室名</td>
-    		<td>${Util.cropString(heya.name)}</td>
+    		<td>${Util.htmlSpecialChars(heya.name)}</td>
     	</tr>
     	<tr>
     		<th>予約時刻</th>
@@ -47,7 +35,6 @@
     		<td>${Util.htmlSpecialChars(meetingRoom.user.name)}</td>
     	</tr>
     </table>
->>>>>>> main
 		<hr>
 	<form action="<%=request.getContextPath()%>/menu.jsp" method="post">
 		<input type="submit" value="確認">
