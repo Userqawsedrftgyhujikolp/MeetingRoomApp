@@ -76,6 +76,7 @@ public class UserDao {
 			e.printStackTrace();
 		}
 			
+		
 	} catch (SQLException e1) {
 		// TODO 自動生成された catch ブロック
 		e1.printStackTrace();
