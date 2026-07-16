@@ -38,7 +38,7 @@
 	<form action="<%=request.getContextPath()%>/CancelServlet" method="post">
 		<input type="submit" value="決定">
 	</form>
-	<form action="<%=request.getContextPath()%>/menu.jsp" method="post">
+	<form action="<%=request.getContextPath()%>/cancelInput.jsp" method="post">
 		<input type="submit" value="戻る">
 	</form>
 </body>
