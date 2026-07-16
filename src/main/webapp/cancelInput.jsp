@@ -28,7 +28,7 @@
 	<h2>キャンセル可能時間帯(<%= Util.htmlSpecialChars(mr.getUser().getName()) %>)</h2>
 <table>
 	<tr>
-		<td>会議室名\時間帯</td>
+		<td>会議室名&bsol;時間帯</td>
 		
 	     <% String [] jikan = MeetingRoom.getPeriod();
 		  for(int t = 0 ; t < jikan.length ; t++){ %>
