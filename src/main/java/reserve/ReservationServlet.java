@@ -34,8 +34,8 @@ public class ReservationServlet extends HttpServlet {
 			rdp.forward(request, response);
 			session.removeAttribute("reservation");
 		} catch (Exception e) {
-			request.setAttribute("error", "予約できませんでした"+e);
-			request.getRequestDispatcher("reserveError.jsp").forward(request, response);;
+			request.setAttribute("error",e.getMessage());
+			request.getRequestDispatcher("reserveError.jsp").forward(request, response);
 		}
 	}
 }
