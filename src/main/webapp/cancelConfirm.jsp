@@ -23,7 +23,7 @@
     	</tr>
     	<tr>
     		<th>会議室名</td>
-    		<td>${Util.htmlSpecialChars(heya.name)}</td>
+    		<td>${Util.cropString(heya.name)}</td>
     	</tr>
     	<tr>
     		<th>予約時刻</th>

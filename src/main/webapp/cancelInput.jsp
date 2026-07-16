@@ -37,7 +37,7 @@
 	</tr>
 	    <% for(int r = 0 ; r < reserve.length ; r++){%>
 		<tr> 
-		<th><%= Util.htmlSpecialChars(rb[r].getName()) %></th>
+		<th><%= Util.cropString(rb[r].getName()) %></th>
 		<% for (int p = 0 ; p < reserve[r].length ; p++){ %>
 			<td>
 			<% if(reserve[r][p] != null && reserve[r][p].getUserId().equals(mr.getUser().getId())){ %> 

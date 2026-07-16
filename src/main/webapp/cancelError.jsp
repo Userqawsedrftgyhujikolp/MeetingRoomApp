@@ -16,6 +16,7 @@
 	<h1>会議室予約キャンセル</h1>
 	<hr>
 	<h2>キャンセルエラー</h2>
+	<div class="error">${error }</div>
     <table>
     	<tr>
     		<th>予約日</td>
@@ -23,7 +24,7 @@
     	</tr>
     	<tr>
     		<th>会議室名</td>
-    		<td>${Util.htmlSpecialChars(heya.name)}</td>
+    		<td>${Util.cropString(heya.name)}</td>
     	</tr>
     	<tr>
     		<th>予約時刻</th>

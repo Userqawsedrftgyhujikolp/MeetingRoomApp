@@ -32,9 +32,9 @@ public class Util {
 			return null;
 		}
 		if (str.length() <= length) {
-			return str;
+			return htmlSpecialChars(str);
 		} else {
-			return "<span title=\""+str+"\">"+str.substring(0, (length -1)) + "…</span>";
+			return "<span title=\""+str+"\">"+htmlSpecialChars(str.substring(0, (length -1))) + "…</span>";
 		}
 	}
 	
