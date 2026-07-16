@@ -219,6 +219,13 @@ public class MeetingRoom {
 			throw new Exception("キャンセルする予約がありません");
 		}
 	}
+	
+	/**
+	 * ログイン中のユーザーの削除フラグを立てます
+	 */
+	public void deleteUser() {
+		UserDao.deleteUser(user.getId());
+	}
 
 	public String toString() {//toString
 		String period = "{";
