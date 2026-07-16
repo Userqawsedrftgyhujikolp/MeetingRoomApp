@@ -56,13 +56,18 @@ public class UserDao {
 		//try-with-resourcesによりconnとpstmtは自動的にクローズされる
 		return null;
 	}
-	public static void deleteUser(String id) {
+	public static void deleteUser(String id)throws ClassNotFoundException {
 	//データベース接続
-	Strig sql = "DELETE * FROM user WHERE id = ?"
+	String sql = "DELETE * FROM user WHERE id = ?"
 	//try-with-resources構文でリソースを自動的にクローズ
-	try(
-			Connection conn = ConnectionProvider.getConnection();
-			Prepared Statement pstmt = conn.prepareStatement(sql)	
+	try( Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			//プレースホルダーに値セット
+			pstmt.setString(1,);
+			
+			
+			
+			
 	}
 	}
 
