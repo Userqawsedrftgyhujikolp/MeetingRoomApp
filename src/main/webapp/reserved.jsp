@@ -16,8 +16,6 @@
 <hr>
 <h2>予約完了</h2>
 
-<form action="<%=request.getContextPath()%>/LoginServlet" method="post">
-
 	<table class="reserve-table">
 		<tr>
 			<td class="display">予約ＩＤ</td>
@@ -42,8 +40,8 @@
 	</table>
 
 	<hr>
-
-	<input type="submit" value="完了">
+ 	<form action="<%= request.getContextPath() %>/menu.jsp"method="post">
+    <input type="submit"value="完了">
 
 </form>
 <body>
