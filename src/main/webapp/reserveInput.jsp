@@ -37,7 +37,7 @@
 
 	<% for(int n=0; n<mr.getRooms().length; n++){ %>
 		<tr>
-			<th><%=mr.getRooms()[n].getName()%></th>
+			<th><%=Util.cropString(mr.getRooms()[n].getName())%></th>
 			<% for(int i=0; i<mr.getPeriod().length; i++){ %>
 				<td>
 					<% if(reserve[n][i] == null){ %>
