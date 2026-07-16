@@ -18,31 +18,31 @@
 
 <form action="<%=request.getContextPath()%>/LoginServlet" method="post">
 
-	
-		<table class="reserve-table">
-			<tr>
-				<td class="display">予約ＩＤ</td>
-				<td>${reservation.id}</td>
-			</tr>
-			<tr>
-				<td class="display">予約日</td>
-				<td>${reservation.date}</td>
-			</tr>
-			<tr>
-				<td class="display">会議室</td>
-				<td>${Util.htmlSpecialChars(meetingRoom.getRoom(reservation.roomId).name)}</td>
-			</tr>
-			<tr>
-				<td class="display">予約時刻</td>
-				<td>${reservation.start}～${reservation.end}</td>
-			</tr>
-			<tr>
-				<td class="display">予約者</td>
-				<td>${meetingRoom.user.name}</td>
-			</tr>
-		</table>
-	
+	<table class="reserve-table">
+		<tr>
+			<td class="display">予約ＩＤ</td>
+			<td>${reservation.id}</td>
+		</tr>
+		<tr>
+			<td class="display">予約日</td>
+			<td>${reservation.date}</td>
+		</tr>
+		<tr>
+			<td class="display">会議室</td>
+			<td>${Util.htmlSpecialChars(meetingRoom.getRoom(reservation.roomId).name)}</td>
+		</tr>
+		<tr>
+			<td class="display">予約時刻</td>
+			<td>${reservation.start}～${reservation.end}</td>
+		</tr>
+		<tr>
+			<td class="display">予約者</td>
+			<td>${Util.htmlSpecialChars(meetingRoom.user.name)}</td>
+		</tr>
+	</table>
+
 	<hr>
+
 	<input type="submit" value="完了">
 
 </form>
@@ -50,12 +50,3 @@
 
 </body>
 </html>
-<<%-- div class="marginbottom"> <table class="reserve-table"> <tr> <td
-class="display">予約ＩＤ</td> <td>${reservation.id}</td> </tr> <tr> <td
-class="display">予約日</td> <td>${reservation.date}</td> </tr> <tr> <td
-class="display">会議室</td>
-<td>${Util.htmlSpecialChars(meetingRoom.getRoom(reservation.roomId).name)}</td>
-</tr> <tr> <td class="display">予約時刻</td>
-<td>${reservation.start}～${reservation.end}</td> </tr> <tr> <td
-class="display">予約者</td> <td>${meetingRoom.user.name}</td> </tr>
-</table> </div> --%>
