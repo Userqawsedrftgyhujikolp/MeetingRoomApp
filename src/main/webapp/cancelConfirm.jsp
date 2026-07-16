@@ -5,9 +5,6 @@
 <%@ page import="bean.RoomBean"%>
 <%@ page import="bean.UserBean"%>
 <%@ page import="bean.Util"%>
-<%
-	System.out.println("canselConfirm");
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,7 +23,7 @@
     	</tr>
     	<tr>
     		<th>会議室名</td>
-    		<td>${Util.htmlSpecialChars(heya.name)}</td>
+    		<td>${Util.cropString(heya.name)}</td>
     	</tr>
     	<tr>
     		<th>予約時刻</th>
@@ -38,11 +35,11 @@
     	</tr>
     </table>
 	<hr>
-	<form action="<%=request.getContextPath()%>/menu.jsp" method="post">
-		<input type="submit" value="戻る">
-	</form>
 	<form action="<%=request.getContextPath()%>/CancelServlet" method="post">
 		<input type="submit" value="決定">
+	</form>
+	<form action="<%=request.getContextPath()%>/menu.jsp" method="post">
+		<input type="submit" value="戻る">
 	</form>
 </body>
 </html>
