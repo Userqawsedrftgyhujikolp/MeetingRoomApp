@@ -56,6 +56,14 @@ public class UserDao {
 		//try-with-resourcesによりconnとpstmtは自動的にクローズされる
 		return null;
 	}
+	public static void deleteUser(String id) {
+	//データベース接続
+	Strig sql = "DELETE * FROM user WHERE id = ?"
+	//try-with-resources構文でリソースを自動的にクローズ
+	try(
+			Connection conn = ConnectionProvider.getConnection();
+			Prepared Statement pstmt = conn.prepareStatement(sql)	
+	}
 	}
 
 
