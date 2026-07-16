@@ -224,7 +224,13 @@ public class MeetingRoom {
 	 * ログイン中のユーザーの削除フラグを立てます
 	 */
 	public void deleteUser() {
-		UserDao.deleteUser(user.getId());
+		try {
+			UserDao.deleteUser(user.getId());
+		} catch (ClassNotFoundException e) {
+			// TODO 自動生成された catch ブロック
+			System.out.println("MeetingRoom.deleteUser -> 例外をキャッチしました");
+			e.printStackTrace();
+		}
 	}
 
 	public String toString() {//toString
