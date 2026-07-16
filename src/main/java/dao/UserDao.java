@@ -19,8 +19,8 @@ public class UserDao {
             return null;
 		}    
 	//データベース接続
-	String sql="SELECT*FROM user WHERE id=? and password=?";
-	
+	//String sql="SELECT*FROM user WHERE id=? and password=?";
+	String sql = "SELECT * FROM user WHERE id = ? and password = ? and delete_flg = 0";
 	// try-with-resources構文でリソースを自動的にクローズ
 	try (
             Connection conn = ConnectionProvider.getConnection();
@@ -58,17 +58,28 @@ public class UserDao {
 	}
 	public static void deleteUser(String id)throws ClassNotFoundException {
 	//データベース接続
-	String sql = "DELETE * FROM user WHERE id = ?"
+	String sql = "DELETE * FROM user WHERE id = ?";
 	//try-with-resources構文でリソースを自動的にクローズ
-	try( Connection conn = ConnectionProvider.getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(sql);
+	try(Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql)){
 			//プレースホルダーに値セット
-			pstmt.setString(1,);
+		try {
+			pstmt.setString(1,id);
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+		try(ResultSet rs = pstmt.executeQuery()){
 			
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
 			
-			
-			
-	}
-	}
+	} catch (SQLException e1) {
+		// TODO 自動生成された catch ブロック
+		e1.printStackTrace();
+	}}}
+	
 
 
