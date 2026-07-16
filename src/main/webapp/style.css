@@ -11,3 +11,26 @@ body {
     100% { background-position: 200%; }
 }
 
+.marginbottom{
+	margin-bottom: 10px;
+}
+
+.display{
+	display: inline-block;
+	width: 100px;
+}
+
+.reserve-table {
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.reserve-table td {
+    padding: 6px 10px;
+    vertical-align: middle;
+}
+
+.reserve-table td.display {
+    width: 100px;
+    font-weight: bold;
+}
