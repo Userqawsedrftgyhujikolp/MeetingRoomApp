@@ -27,7 +27,7 @@
 		予約可能時間(${Util.htmlSpecialChars(meetingRoom.user.name)})
 	</h2>
 </form>
-<table>
+<table class="table">
 	<tr>
 		<th>会議室/時間帯</th>
 		<% for(int i=0; i<mr.getPeriod().length; i++){ %>
