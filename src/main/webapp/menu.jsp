@@ -5,6 +5,12 @@
 <%@ page import="bean.RoomBean"%>
 <%@ page import="bean.UserBean"%>
 <%@ page import="bean.Util"%>
+<%
+String[] keys = {"reservation","yoyaku","heya","yayaku"};
+for(String key: keys){
+	session.removeAttribute(key);
+}
+%>
 <!DOCTYPE html>
 <html>
 <head>
