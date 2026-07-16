@@ -26,20 +26,19 @@
 	<h2>
 		予約可能時間(${Util.htmlSpecialChars(meetingRoom.user.name)})
 	</h2>
-</form>
-<table class="table">
-	<tr>
-		<th>会議室/時間帯</th>
+<table class="table background">
+	<tr class="table">
+		<th class="table">会議室/時間帯</th>
 		<% for(int i=0; i<mr.getPeriod().length; i++){ %>
-			<th><%=mr.getPeriod()[i]%></th>
+			<th class="table"><%=mr.getPeriod()[i]%></th>
 		<% } %>
 	</tr>
 
 	<% for(int n=0; n<mr.getRooms().length; n++){ %>
-		<tr>
-			<th><%=Util.cropString(mr.getRooms()[n].getName())%></th>
+		<tr class="table">
+			<th class="table"><%=Util.cropString(mr.getRooms()[n].getName())%></th>
 			<% for(int i=0; i<mr.getPeriod().length; i++){ %>
-				<td>
+				<td class="table">
 					<% if(reserve[n][i] == null){ %>
 						<form action="<%=request.getContextPath()%>/ReserveCreate" method="post">
 							<input type="hidden" name="roomId" value="<%=mr.getRooms()[n].getId()%>">

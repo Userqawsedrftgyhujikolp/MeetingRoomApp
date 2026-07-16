@@ -37,5 +37,9 @@ body {
 
 .table {
     margin: 0 auto;
-    border: 2px solid black; 
+    border: 0.01px solid black; 
+}
+
+.background{
+	background-color: #E8E8E8;
 }
