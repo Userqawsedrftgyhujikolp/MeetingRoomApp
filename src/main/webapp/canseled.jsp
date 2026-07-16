@@ -16,7 +16,7 @@
 <h1>会議室予約キャンセル</h1>
 <hr>
 <h2>キャンセル完了</h2>
-<<<<<<< HEAD
+<!--  <<<<<<< HEAD
 
   <form action="<%= request.getContextPath() %>/LoginServlet"method="post">
     
@@ -25,7 +25,7 @@
     予約開始時刻 <input type="time"name="reservation.start"value="hh:mm"><br>
     予約終了時刻 <input type="time"name="reservation.end"value="hh:mm"><br>
     予約者       <input type="text"name="meetingRoom.user.name"value=""><br>
-=======
+=======-->
     <table>
     	<tr>
     		<th>予約日</td>
