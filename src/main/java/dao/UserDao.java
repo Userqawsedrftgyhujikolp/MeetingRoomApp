@@ -78,4 +78,17 @@ public class UserDao {
 			e1.printStackTrace();
 		}
 	}
+	public int Insert(UserBean user) throws ClassNotFoundException, SQLException {
+		String sql = "INSERT INTO user ( id , password , name , address)VALUE( ? , ? , ? , ?)";
+		Connection conn = ConnectionProvider.getConnection();
+		
+				PreparedStatement pstmt = conn.prepareStatement(sql);{
+			pstmt.setString( 1 , user.getId());
+			pstmt.setString( 2 , user.getPassword());
+			pstmt.setString( 3 , user.getName());
+			pstmt.setString( 4 , user.getAddress());
+			int result = pstmt.executeUpdate();
+		}
+				return 0;
+	}
 }
