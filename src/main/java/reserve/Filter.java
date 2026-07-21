@@ -45,7 +45,8 @@ public class Filter extends HttpFilter implements javax.servlet.Filter {
 	    HttpServletRequest httpRequest = (HttpServletRequest) request;
 	    HttpServletResponse httpResponse = (HttpServletResponse) response;
 		String url = httpRequest.getRequestURI().substring(httpRequest.getContextPath().length());
-	    if (url.equals("/login.jsp") || url.endsWith(".css") || url.equals("/Login")) {
+	    if (url.equals("/login.jsp") || url.endsWith(".css") ||
+	    		url.equals("/Login")|| url.equals("/UserAddInput.jsp")) {
 //	    	System.out.println("urlが指定の形式のためパスします");
 	        chain.doFilter(request, response);
 	        return;
