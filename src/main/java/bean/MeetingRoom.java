@@ -278,15 +278,16 @@ public class MeetingRoom {
 			id = UserDao.GetMaxId(year);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
+			return null;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return null;
 		}
 	    int nextSeq;
 	    if (id == null) {
 	        nextSeq = 1;
 	    } else {
-	        String seqPart = id.substring(2);
-	        nextSeq = Integer.parseInt(seqPart) + 1;
+	        nextSeq = Integer.parseInt(id) + 1;
 	    }
 	    String nextIdNum = String.format("%05d", nextSeq);
 	    String userId = year+nextIdNum;
@@ -295,9 +296,11 @@ public class MeetingRoom {
 			UserDao.Insert(user);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
+			return null;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("SQLエラーが発生しました");
+			return null;
 		}
 		return UserDao.certificate(userId, name);
 	}
