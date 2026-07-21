@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ page import="bean.MeetingRoom"%>
 <%@ page import="bean.ReservationBean"%>
 <%@ page import="bean.RoomBean"%>
 <%@ page import="bean.UserBean"%>
 <%@ page import="bean.Util"%>
 <%
-String[] keys = {"reservation","yoyaku","heya","yayaku"};
-for(String key: keys){
+String[] keys = { "reservation", "yoyaku", "heya", "yayaku" };
+for (String key : keys) {
 	session.removeAttribute(key);
 }
 %>
@@ -22,13 +22,19 @@ for(String key: keys){
 	<h1>会議室予約</h1>
 	<hr>
 	<h2>メニュー</h2>
-	<form action="<%=request.getContextPath() %>/reserveInput.jsp" method="post">
+	<form action="<%=request.getContextPath()%>/reserveInput.jsp"
+		method="post">
 		<input type="submit" value="会議室予約">
 	</form>
-	<form action="<%=request.getContextPath() %>/cancelInput.jsp" method="post">
+	<form action="<%=request.getContextPath()%>/cancelInput.jsp"
+		method="post">
 		<input type="submit" value="予約キャンセル">
 	</form>
-	<form action="<%=request.getContextPath() %>/Logout" method="post">
+	<form action="<%=request.getContextPath()%>/Confirm"
+		method="post">
+		<input type="submit" value="予約の確認">
+	</form>
+	<form action="<%=request.getContextPath()%>/Logout" method="post">
 		<input type="submit" value="ログアウト">
 	</form>
 </body>
