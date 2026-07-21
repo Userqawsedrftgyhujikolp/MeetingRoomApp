@@ -1,7 +1,7 @@
 package reserve;
 
+
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,16 +14,16 @@ import bean.MeetingRoom;
 import bean.ReservationBean;
 
 /**
- * Servlet implementation class CsvExport
+ * Servlet implementation class ConfilmSevlet
  */
-@WebServlet("/CsvExport")
-public class CsvExport extends HttpServlet {
+@WebServlet("/Confirm")
+public class ConfirmServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CsvExport() {
+    public ConfirmServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,29 +33,12 @@ public class CsvExport extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		MeetingRoom mr = (MeetingRoom)session.getAttribute("meetingRoom");
-		response.setContentType("text/csv;charset=UTF-8");
-		String attachment = "attachment; filename=\""+mr.getDate()+"data.csv\"";
-		response.setHeader("Content-Disposition", attachment);
-		ReservationBean[][] reservations = mr.getReservations();
-		try(PrintWriter writer = response.getWriter()){
-			writer.println("予約番号,会議室,開始時刻,終了時刻,利用者");
-			for(ReservationBean[] reservR : reservations) {
-				for(ReservationBean reserv : reservR) {
-					if(reserv != null) {
-						//予約情報を書き込む
-						int id = reserv.getId();
-						String room = mr.getRoom(reserv.getRoomId()).getName();
-						String start = reserv.getStart();
-						String end = reserv.getEnd();
-						String user = reserv.getUserId();
-						writer.println(id+","+room+","+start+","+end+","+user);
-					}
-				}
-			}
-		}
-		response.sendRedirect(request.getContextPath()+"csvSelect.jsp");
+		ReservationBean[] reserv = mr.ConfirmReservation();
+		request.setAttribute("reservs", reserv);
+		request.getRequestDispatcher("confirm.jsp").forward(request, response);
 	}
 
 	/**

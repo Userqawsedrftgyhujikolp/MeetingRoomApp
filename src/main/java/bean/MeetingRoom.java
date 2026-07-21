@@ -160,7 +160,7 @@ public class MeetingRoom {
 	}
 	
 	/**
-	 * 
+	 * ログイン中のユーザーの未来の予約を返します
 	 * @return
 	 */
 	public ReservationBean[] ConfirmReservation() {

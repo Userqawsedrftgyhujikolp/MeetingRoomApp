@@ -52,6 +52,15 @@ public class ReservationDao {
 		return null;
 	}
 
+	/**
+	 * 指定したユーザーが行った指定時刻以降の予約を返します
+	 * @param userId ユーザーID
+	 * @param date 日付
+	 * @param time 時刻
+	 * @return 予約一覧
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
 	public static List<ReservationBean> findById(String userId, String date, String time) throws SQLException, ClassNotFoundException {
 		List<ReservationBean> rList = new ArrayList<ReservationBean>();
 		//データベース接続
@@ -84,10 +93,6 @@ public class ReservationDao {
 			}
 		}
 	}
-	/*
-	 * ログイン中のユーザーが行った未来の予約を返します
-	 * 
-	 */
 	
 	//	予約を追加するメソッド
 	public static boolean insert(ReservationBean reservation) throws ClassNotFoundException {
