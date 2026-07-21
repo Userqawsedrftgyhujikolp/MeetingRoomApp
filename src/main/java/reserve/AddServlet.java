@@ -23,15 +23,15 @@ public class AddServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		//データを受信
 		HttpSession session = request.getSession();
-		//			パスワード、名前、住所を取得
-		String Addpass = request.getParameter("password");
-		String Addname = request.getParameter("name");
-		String Addaddress = request.getParameter("address");
+		//パスワード、名前、住所を取得
+		String addPass = request.getParameter("password");
+		String addName = request.getParameter("name");
+		String addAddress = request.getParameter("address");
 		try {
 			MeetingRoom mr = (MeetingRoom) session.getAttribute("meetingRoom");
-			UserBean UserB = mr.InsertUser(Addpass, Addname, Addaddress);
+			UserBean userb = mr.InsertUser(addPass, addName, addAddress);
 			//追加に成功したらセッション属性に入れて、予約確定画面へフォワード
-			session.setAttribute("useradd", UserB);
+			session.setAttribute("useradd", userb);
 			RequestDispatcher rdp = request.getRequestDispatcher("AddOut.jsp");
 			rdp.forward(request, response);
 		} catch (IOException e) {
