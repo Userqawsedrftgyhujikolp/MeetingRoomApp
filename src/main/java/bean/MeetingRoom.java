@@ -158,6 +158,34 @@ public class MeetingRoom {
 		}
 		return reserve;
 	}
+	
+	/**
+	 * ログイン中のユーザーの未来の予約を返します
+	 * @return
+	 */
+	public ReservationBean[] ConfirmReservation() {
+		SimpleDateFormat sdf = new SimpleDateFormat("");
+		Calendar cl = Calendar.getInstance();
+		String time = sdf.format(cl.getTime());
+		ReservationBean[] reserve;
+		List<ReservationBean> reservFromDB;
+		try {
+			reservFromDB = ReservationDao.findById(this.user.getId(),date,time);
+			reserve = new ReservationBean[reservFromDB.size()];
+		} catch (Exception e) {
+			System.err.println("MeetingRoom->getReservations(): ReservationDao.findByDate()にて例外をキャッチしました\n" + e);
+			return null;
+		}
+		if (reservFromDB != null) {
+			int i = 0;
+			for(ReservationBean rb:reservFromDB) {
+				reserve[i] = rb;
+				i++;
+			}
+		}
+		return reserve;
+	}
+	
 	/**
 	 * 引数として与えられた情報を基に予約情報を生成します
 	 * @param String roomId 会議室ID
@@ -224,7 +252,13 @@ public class MeetingRoom {
 	 * ログイン中のユーザーの削除フラグを立てます
 	 */
 	public void deleteUser() {
-		UserDao.deleteUser(user.getId());
+		try {
+			UserDao.deleteUser(user.getId());
+		} catch (ClassNotFoundException e) {
+			// TODO 自動生成された catch ブロック
+			System.out.println("MeetingRoom.deleteUser -> 例外をキャッチしました");
+			e.printStackTrace();
+		}
 	}
 
 	public String toString() {//toString
