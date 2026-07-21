@@ -79,7 +79,7 @@ public class UserDao {
 		}
 	}
 
-	public int Insert(UserBean user) throws ClassNotFoundException, SQLException {
+	public static int Insert(UserBean user) throws ClassNotFoundException, SQLException {
 		String sql = "INSERT INTO user ( id , password , name , address)VALUE( ? , ? , ? , ?)";
 		Connection conn = ConnectionProvider.getConnection();
 
@@ -94,7 +94,7 @@ public class UserDao {
 		return 0;
 	}
 
-	public String GetMaxId(String year) throws ClassNotFoundException, SQLException {
+	public static String GetMaxId(String year) throws ClassNotFoundException, SQLException {
 		String sql = "SELECT MAX (id) FROM user WHERE id LIKE ?";
 		Connection conn = ConnectionProvider.getConnection();
 		PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -103,7 +103,7 @@ public class UserDao {
 		ResultSet rs = pstmt.executeQuery();
 
 		if (rs.next()) {
-			String MaxId = rs.getString(1);
+			String MaxId = rs.getString("id");
 			return MaxId;
 		}
 		return null;
