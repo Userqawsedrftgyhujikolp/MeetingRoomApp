@@ -21,5 +21,8 @@
 			<label>パスワード：</label><input type="password" name="userPw"><br>
 			<input type="submit" value="ログイン">
 	</form>
+	<form action="<%= request.getContextPath()%>/UserAddInput.jsp"method="post">
+	<input type="submit" value="新規登録">
+	</form>
 </body>
 </html>
