@@ -267,7 +267,7 @@ public class MeetingRoom {
 	 * @param pass パスワード
 	 * @param name 名前
 	 * @param address
-	 * @return
+	 * @return UserBean / 追加したユーザー
 	 */
 	public UserBean InsertUser(String pass , String name , String address) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yy");
@@ -299,10 +299,30 @@ public class MeetingRoom {
 			return null;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("SQLエラーが発生しました");
+			System.out.println("UserDao.Insert->SQLエラーが発生しました");
 			return null;
 		}
 		return UserDao.certificate(userId, name);
+	}
+	/**
+	 * 引数を基に会議室を追加します
+	 * @param floor 会議室の階層
+	 * @param name 会議室名
+	 * @return RoomBean / 追加した会議室
+	 */
+	public RoomBean insertRoom(String floor, String name) {
+		RoomBean room;
+		try {
+			room = RoomDao.insertRoom(floor, name);
+			if(room != null) {
+				return room;
+			}else {
+				return null;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	public String toString() {//toString
