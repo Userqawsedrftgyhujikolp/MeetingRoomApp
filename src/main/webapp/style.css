@@ -1,56 +1,85 @@
 @charset "UTF-8";
+
 body {
-    text-align: center;
-    background: linear-gradient(to right, #f00, #fa0, #ff0, #0f0, #0ff, #00f, #808, #f00) 0 / 200% 100%;
-    animation: 5s moves linear infinite;
-    height: 80px;
+	text-align: center;
+	background: linear-gradient(to right, #f00, #fa0, #ff0, #0f0, #0ff, #00f, #808, #f00) 0 / 200% 100%;
+	animation: 5s moves linear infinite;
+	height: 80px;
 }
 
-@keyframes moves{
-	0%{ background-position: 0%;}
-    100% { background-position: 200%; }
+@keyframes moves {
+	0% {
+		background-position: 0%;
+	}
+
+	100% {
+		background-position: 200%;
+	}
 }
 
-.marginbottom{
+.marginbottom {
 	margin-bottom: 10px;
 }
 
-.display{
+.display {
 	display: inline-block;
 	width: 100px;
 }
 
 .reserve-table {
-    border-collapse: collapse;
-    margin-bottom: 20px;
+	border-collapse: collapse;
+	margin-bottom: 20px;
 }
 
 .reserve-table td {
-    padding: 6px 10px;
-    vertical-align: middle;
+	padding: 6px 10px;
+	vertical-align: middle;
 }
 
 .reserve-table td.display {
-    width: 100px;
-    font-weight: bold;
+	width: 100px;
+	font-weight: bold;
 }
 
 .table {
-    margin: 0 auto;
-    border: 0.01px solid black; 
+	margin: 0 auto;
+	border: 0.01px solid black;
 }
 
-.background{
+.background {
 	background-color: #E8E8E8;
 }
 
-.ybotan{
-	background-color:powderblue;
+.ybotan {
+	background-color: powderblue;
 }
 
-.button{
-display:inline-block;
+.button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	margin-top: 20px;
 }
-.div{
-text-align:center;
+
+.button form {
+	display: inline-block;
+	margin: 0;
+}
+
+.table td button[disabled] {
+	width: 90px;
+	/* 【調整】予約済ボタンの幅 */
+	height: 38px;
+	/* 【調整】予約済ボタンの高さ */
+	box-sizing: border-box;
+	/* パディング等を含めた固定サイズにする */
+
+	/* 
+     * ※もし、高さだけを変えて横幅は時間のボタンに合わせたい場合は、
+     * 「width: 100%;」に指定すると、親のtdの幅（時間のボタンに合わせて伸縮中）に合います。
+     * ↓
+     * width: 100%;
+     * height: 40px; 
+     */
 }
