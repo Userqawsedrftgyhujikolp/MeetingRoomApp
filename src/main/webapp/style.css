@@ -68,18 +68,7 @@ body {
 }
 
 .table td button[disabled] {
-	width: 90px;
-	/* 【調整】予約済ボタンの幅 */
-	height: 38px;
-	/* 【調整】予約済ボタンの高さ */
+	width: 100%;
+	height: 21.33px;
 	box-sizing: border-box;
-	/* パディング等を含めた固定サイズにする */
-
-	/* 
-     * ※もし、高さだけを変えて横幅は時間のボタンに合わせたい場合は、
-     * 「width: 100%;」に指定すると、親のtdの幅（時間のボタンに合わせて伸縮中）に合います。
-     * ↓
-     * width: 100%;
-     * height: 40px; 
-     */
 }
