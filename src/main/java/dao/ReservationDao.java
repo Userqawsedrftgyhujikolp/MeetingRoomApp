@@ -52,6 +52,43 @@ public class ReservationDao {
 		return null;
 	}
 
+	public static List<ReservationBean> findById(String userId, String date, String time) throws SQLException, ClassNotFoundException {
+		List<ReservationBean> rList = new ArrayList<ReservationBean>();
+		//データベース接続
+		String sql = "SELECT * FROM reservation WHERE userId = ? and (date > ? or (date = ? and start >= ?))";
+		try (Connection conn = ConnectionProvider.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			//プレースホルダーに値を設定
+			pstmt.setString(1, userId);
+			pstmt.setString(2, date);
+			pstmt.setString(3, date);
+			pstmt.setString(4, time);
+			try (ResultSet rs = pstmt.executeQuery()) {
+				while (rs.next()) {
+					//ReservationBeanに引数を渡すためgetしたものを変数に格納
+					int yoyakuid = rs.getInt("id");
+					String yoyakudate = rs.getString("date");
+					String yoyakuroomId = rs.getString("roomId");
+					String yoyakustart = rs.getString("start");
+					String yoyakuend = rs.getString("end");
+					String yoyakuuserId = rs.getString("userId");
+					//時刻の修正（HH:mm:ss -> HH:mm）
+					yoyakustart = yoyakustart.substring(0, 5);
+					yoyakuend = yoyakuend.substring(0, 5);
+					
+					ReservationBean kensaku = new ReservationBean(yoyakuid, yoyakuroomId, yoyakudate ,yoyakustart,
+							yoyakuend, yoyakuuserId);
+					rList.add(kensaku);
+				}
+				return rList;
+			}
+		}
+	}
+	/*
+	 * ログイン中のユーザーが行った未来の予約を返します
+	 * 
+	 */
+	
 	//	予約を追加するメソッド
 	public static boolean insert(ReservationBean reservation) throws ClassNotFoundException {
 		String sql = "INSERT INTO reservation(roomId,date,start,end,userId)VALUES(?,?,?,?,?)";

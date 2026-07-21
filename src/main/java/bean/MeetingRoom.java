@@ -158,6 +158,34 @@ public class MeetingRoom {
 		}
 		return reserve;
 	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public ReservationBean[] ConfirmReservation() {
+		SimpleDateFormat sdf = new SimpleDateFormat("");
+		Calendar cl = Calendar.getInstance();
+		String time = sdf.format(cl.getTime());
+		ReservationBean[] reserve;
+		List<ReservationBean> reservFromDB;
+		try {
+			reservFromDB = ReservationDao.findById(this.user.getId(),date,time);
+			reserve = new ReservationBean[reservFromDB.size()];
+		} catch (Exception e) {
+			System.err.println("MeetingRoom->getReservations(): ReservationDao.findByDate()にて例外をキャッチしました\n" + e);
+			return null;
+		}
+		if (reservFromDB != null) {
+			int i = 0;
+			for(ReservationBean rb:reservFromDB) {
+				reserve[i] = rb;
+				i++;
+			}
+		}
+		return reserve;
+	}
+	
 	/**
 	 * 引数として与えられた情報を基に予約情報を生成します
 	 * @param String roomId 会議室ID
