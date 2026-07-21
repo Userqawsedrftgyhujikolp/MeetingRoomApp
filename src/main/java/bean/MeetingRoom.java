@@ -1,5 +1,6 @@
 package bean;
 
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -272,7 +273,14 @@ public class MeetingRoom {
 		SimpleDateFormat sdf = new SimpleDateFormat("yy");
 		Calendar cl = Calendar.getInstance();
 		String year = sdf.format(cl.getTime());
-		String id = UserDao.GetMaxId(year);
+		String id = null;
+		try {
+			id = UserDao.GetMaxId(year);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	    int nextSeq;
 	    if (id == null) {
 	        nextSeq = 1;
@@ -283,7 +291,14 @@ public class MeetingRoom {
 	    String nextIdNum = String.format("%05d", nextSeq);
 	    String userId = year+nextIdNum;
 		UserBean user = new UserBean(userId,pass, name, address);
-		UserDao.Insert(user);
+		try {
+			UserDao.Insert(user);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("SQLエラーが発生しました");
+		}
 		return UserDao.certificate(userId, name);
 	}
 
