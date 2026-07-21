@@ -78,4 +78,34 @@ public class UserDao {
 			e1.printStackTrace();
 		}
 	}
+
+	public int Insert(UserBean user) throws ClassNotFoundException, SQLException {
+		String sql = "INSERT INTO user ( id , password , name , address)VALUE( ? , ? , ? , ?)";
+		Connection conn = ConnectionProvider.getConnection();
+
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		{
+			pstmt.setString(1, user.getId());
+			pstmt.setString(2, user.getPassword());
+			pstmt.setString(3, user.getName());
+			pstmt.setString(4, user.getAddress());
+			int result = pstmt.executeUpdate();
+		}
+		return 0;
+	}
+
+	public String GetMaxId(String year) throws ClassNotFoundException, SQLException {
+		String sql = "SELECT MAX (id) FROM user WHERE id LIKE ?";
+		Connection conn = ConnectionProvider.getConnection();
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		//プレースホルダーから値貰う(西暦２桁)
+		pstmt.setString(1, year + "%");//Meetingroom貰うよ
+		ResultSet rs = pstmt.executeQuery();
+
+		if (rs.next()) {
+			String MaxId = rs.getString(1);
+			return MaxId;
+		}
+		return null;
+	}
 }
