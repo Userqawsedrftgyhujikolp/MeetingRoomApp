@@ -67,8 +67,15 @@ body {
 	margin: 0;
 }
 
+.ybotan,
 .table td button[disabled] {
+	display: block;
 	width: 100%;
-	height: 21.33px;
+	height: 100%;
 	box-sizing: border-box;
+}
+
+.table td {
+	padding: 0;
+	height: 100%;
 }
