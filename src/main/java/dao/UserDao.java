@@ -45,14 +45,14 @@ public class UserDao {
 					//userData[2]=rs.getString("password");
 				}
 			}
-			System.out.println("ドライバが見つかりません");
 		} catch (SQLException e) {
 			e.printStackTrace();
+			System.out.println("SQLに関するエラーです");
 		} catch (ClassNotFoundException e1) {
 			// TODO 自動生成された catch ブロック
+			System.out.println("ドライバが見つかりません");
 			e1.printStackTrace();
 		}
-		System.out.println("SQLに関するエラーです");
 
 		//try-with-resourcesによりconnとpstmtは自動的にクローズされる
 		return null;
@@ -92,7 +92,7 @@ public class UserDao {
 		}
 	}
 
-	public static String GetMaxId(String year) throws ClassNotFoundException, SQLException {
+	public static int GetMaxId(String year) throws Exception {
 		String sql = "SELECT MAX(CAST(SUBSTRING(id, 3, 5) AS UNSIGNED)) AS id FROM user WHERE id LIKE ?";
 		try (Connection conn = ConnectionProvider.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -101,10 +101,10 @@ public class UserDao {
 			try (ResultSet rs = pstmt.executeQuery()) {
 
 				if (rs.next() && rs.getObject("id") != null) {
-					String MaxId = rs.getString("id");
+					int MaxId = rs.getInt("id");
 					return MaxId;
 				}
-				return null;
+				throw new Exception();
 			}
 		}
 	}
