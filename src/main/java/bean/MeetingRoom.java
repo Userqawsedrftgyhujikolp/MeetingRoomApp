@@ -260,6 +260,32 @@ public class MeetingRoom {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * 引数として与えられた文字列を基にDBにユーザーを追加します
+	 * @param pass パスワード
+	 * @param name 名前
+	 * @param address
+	 * @return
+	 */
+	public UserBean InsertUser(String pass , String name , String address) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yy");
+		Calendar cl = Calendar.getInstance();
+		String year = sdf.format(cl.getTime());
+		String id = UserDao.GetMaxId(year);
+	    int nextSeq;
+	    if (id == null) {
+	        nextSeq = 1;
+	    } else {
+	        String seqPart = id.substring(2);
+	        nextSeq = Integer.parseInt(seqPart) + 1;
+	    }
+	    String nextIdNum = String.format("%05d", nextSeq);
+	    String userId = year+nextIdNum;
+		UserBean user = new UserBean(userId,pass, name, address);
+		UserDao.Insert(user);
+		return UserDao.certificate(userId, name);
+	}
 
 	public String toString() {//toString
 		String period = "{";
