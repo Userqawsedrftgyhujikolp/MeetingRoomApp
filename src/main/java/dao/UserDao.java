@@ -38,7 +38,8 @@ public class UserDao {
 					String password1 = rs.getString("password");
 					String name = rs.getString("name");
 					String address = rs.getString("address");
-					UserBean user = new UserBean(id1, password1, name, address);
+					int admin = rs.getInt("admin");
+					UserBean user = new UserBean(id1, password1, name, address, admin);
 					return user;
 
 					//userData[2]=rs.getString("password");
@@ -80,32 +81,31 @@ public class UserDao {
 	}
 
 	public static int Insert(UserBean user) throws ClassNotFoundException, SQLException {
-		String sql = "INSERT INTO user ( id , password , name , address)VALUE( ? , ? , ? , ?)";
-		Connection conn = ConnectionProvider.getConnection();
-
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		{
+		String sql = "INSERT INTO user ( id , password , name , address)VALUES( ? , ? , ? , ?)";
+		try (Connection conn = ConnectionProvider.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql);) {
 			pstmt.setString(1, user.getId());
 			pstmt.setString(2, user.getPassword());
 			pstmt.setString(3, user.getName());
 			pstmt.setString(4, user.getAddress());
-			int result = pstmt.executeUpdate();
+			return pstmt.executeUpdate();
 		}
-		return 0;
 	}
 
 	public static String GetMaxId(String year) throws ClassNotFoundException, SQLException {
-		String sql = "SELECT MAX (id) FROM user WHERE id LIKE ?";
-		Connection conn = ConnectionProvider.getConnection();
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		//プレースホルダーから値貰う(西暦２桁)
-		pstmt.setString(1, year + "%");//Meetingroom貰うよ
-		ResultSet rs = pstmt.executeQuery();
+		String sql = "SELECT MAX(CAST(SUBSTRING(id, 3, 5) AS UNSIGNED)) AS id FROM user WHERE id LIKE ?";
+		try (Connection conn = ConnectionProvider.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			//プレースホルダーから値貰う(西暦２桁)
+			pstmt.setString(1, year + "%");//Meetingroom貰うよ
+			try (ResultSet rs = pstmt.executeQuery()) {
 
-		if (rs.next()) {
-			String MaxId = rs.getString("id");
-			return MaxId;
+				if (rs.next() && rs.getObject("id") != null) {
+					String MaxId = rs.getString("id");
+					return MaxId;
+				}
+				return null;
+			}
 		}
-		return null;
 	}
 }
