@@ -9,13 +9,21 @@ public class UserBean implements Serializable{
 	private String id;
 	private String name;
 	private String password;
+	private int admin;
 	//コンストラクタ
-	public UserBean() {}
 	public UserBean( String id, String password, String name, String address) {
 		this.id = id;
 		this.password = password;
 		this.name = name;
 		this.address = address;
+		this.admin = 0;
+	}
+	public UserBean( String id, String password, String name, String address,int admin) {
+		this.id = id;
+		this.password = password;
+		this.name = name;
+		this.address = address;
+		this.admin = admin;
 	}
 	//メソッド
 	public String getAddress() {
@@ -29,6 +37,13 @@ public class UserBean implements Serializable{
 	}
 	public String getPassword() {
 		return password;
+	}
+	public boolean isAdmin() {
+		if(admin == 1) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 	@Override
 	public String toString() {

@@ -62,7 +62,6 @@ public class CsvExport extends HttpServlet {
 				}
 			}
 		}
-		response.sendRedirect(request.getContextPath() + "csvSelect.jsp");
 	}
 
 	/**

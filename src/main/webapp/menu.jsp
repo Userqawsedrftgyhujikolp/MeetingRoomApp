@@ -6,6 +6,7 @@
 <%@ page import="bean.UserBean"%>
 <%@ page import="bean.Util"%>
 <%
+MeetingRoom mr = (MeetingRoom)session.getAttribute("meetingRoom");
 String[] keys = { "reservation", "yoyaku", "heya", "yayaku" };
 for (String key : keys) {
 	session.removeAttribute(key);
@@ -34,6 +35,13 @@ for (String key : keys) {
 		method="post">
 		<input type="submit" value="予約の確認">
 	</form>
+	<%if(mr.getUser().isAdmin()){//管理者用メニュー%>
+	<form action="<%=request.getContextPath()%>/csvSelectDate.jsp"
+		method="post">
+		<input type="submit" value="予約のCSV出力">
+	</form>
+	<%} %>
+	
 	<form action="<%=request.getContextPath()%>/Logout" method="post">
 		<input type="submit" value="ログアウト">
 	</form>
