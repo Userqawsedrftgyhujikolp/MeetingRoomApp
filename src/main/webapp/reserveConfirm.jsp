@@ -38,10 +38,10 @@
 
 <br>
 		<form action="<%=request.getContextPath()%>/ReservationServlet" method="post">
-        <input type="submit"value="決定">
+        <input type="submit" class="button" value="決定">
         </form>
         <form action="<%=request.getContextPath()%>/reserveInput.jsp" method="post">
-		<input type="submit" value="戻る">
+		<input type="submit" class="button" value="戻る">
 		</form>
 
 		</body>

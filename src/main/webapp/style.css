@@ -47,3 +47,10 @@ body {
 .ybotan{
 	background-color:powderblue;
 }
+
+.button{
+display:inline-block;
+}
+.div{
+text-align:center;
+}
