@@ -30,7 +30,7 @@ public class AddServlet extends HttpServlet {
 		try {
 			MeetingRoom mr = (MeetingRoom) session.getAttribute("meetingRoom");
 			UserBean userb = mr.InsertUser(addPass, addName, addAddress);
-			//追加に成功したらセッション属性に入れて、予約確定画面へフォワード
+			//追加に成功したらセッション属性に入れて、画面へフォワード
 			session.setAttribute("useradd", userb);
 			RequestDispatcher rdp = request.getRequestDispatcher("AddOut.jsp");
 			rdp.forward(request, response);
