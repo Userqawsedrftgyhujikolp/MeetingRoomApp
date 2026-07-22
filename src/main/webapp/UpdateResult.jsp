@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/style.css">
 </head>
 <body>
-<h1>変更しました</h1>
+<h1>アカウント情報変更しました</h1>
 <table>
 	<tr>
 		<th>名前</th>
