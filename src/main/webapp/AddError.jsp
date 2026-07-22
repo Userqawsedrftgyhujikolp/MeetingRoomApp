@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/style.css">
 </head>
 <body>
-	<h1>ユーザー登録キャンセル</h1>
+	<h1>ユーザー登録エラー</h1>
 	<hr>
 	<h2>登録エラー</h2>
 	<div class = "error" >${ error }</div>
