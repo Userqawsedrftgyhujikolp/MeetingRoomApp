@@ -1,0 +1,21 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>会議室追加</title>
+</head>
+<body>
+	<h1>会議室追加</h1>
+	<hr>
+	${message }
+	<table>
+	<tr><th>id</th><td>${room.id }</td></tr>
+	<tr><th>会議室名</th><td>${room.name }</td></tr>
+	</table>
+	<hr>
+	<a href="<%=request.getContextPath() %>/roomAdd.jsp"><input type="button" value="会議室追加へ"></a>
+	<a href="<%=request.getContextPath() %>/menu.jsp"><input type="button" value="メニューへ"></a>
+</body>
+</html>
