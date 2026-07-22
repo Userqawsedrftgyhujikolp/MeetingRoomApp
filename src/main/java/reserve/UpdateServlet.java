@@ -16,7 +16,8 @@ import bean.MeetingRoom;
 public class UpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		//データを受信
 		HttpSession session = request.getSession();
@@ -26,12 +27,18 @@ public class UpdateServlet extends HttpServlet {
 		String upAddress = request.getParameter("address");
 		MeetingRoom mr = (MeetingRoom) session.getAttribute("meetingRoom");
 		//MeetingRoomクラスのメソッドを使用
-		boolean userb = mr.UserUpdate(upPass, upName, upAddress);
-		//更新に成功したらセッション属性に入れて、画面へフォワード
-		session.setAttribute("userUp", userb);
-		session.setAttribute("meetingRoom", mr);
-		RequestDispatcher rdp = request.getRequestDispatcher("UpdateResult.jsp");
-		rdp.forward(request, response);
+		if (mr.UserUpdate(upPass, upName, upAddress)) {
+			//更新に成功したらセッション属性に入れて、画面へフォワード
+			request.setAttribute("userUp", mr.getUser());
+			request.setAttribute("meetingRoom", mr);
+			RequestDispatcher rdp = request.getRequestDispatcher("UpdateResult.jsp");
+			rdp.forward(request, response);
+		} else {
+			String nextPage;
+			nextPage = request.getContextPath() + "/UpdateInput.jsp";
+			response.sendRedirect(nextPage);
+		}
+
 	}
 
 }
