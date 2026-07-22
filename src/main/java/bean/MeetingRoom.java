@@ -270,39 +270,52 @@ public class MeetingRoom {
 	 * @return UserBean / 追加したユーザー
 	 */
 	public UserBean InsertUser(String pass , String name , String address) {
+		if(pass.length() < 6) {
+			throw new IllegalArgumentException("パスワードが6文字未満です");
+		}
 		SimpleDateFormat sdf = new SimpleDateFormat("yy");
 		Calendar cl = Calendar.getInstance();
 		String year = sdf.format(cl.getTime());
-		String id = null;
+		int id = 0;
 		try {
 			id = UserDao.GetMaxId(year);
 		} catch (ClassNotFoundException e) {
+			System.out.println("MeetingRoom.InsertUser->UserDao.GetMaxIdにてClassNotFoundException");
 			e.printStackTrace();
 			return null;
 		} catch (SQLException e) {
+			System.out.println("MeetingRoom.InsertUser->UserDao.GetMaxIdにてSQLException");
+			e.printStackTrace();
+			return null;
+		} catch (Exception e) {
+			System.out.println("MeetingRoom.InsertUser->UserDao.GetMaxIdにて不明な例外");
 			e.printStackTrace();
 			return null;
 		}
 	    int nextSeq;
-	    if (id == null) {
+	    if (id == 0) {
 	        nextSeq = 1;
 	    } else {
-	        nextSeq = Integer.parseInt(id) + 1;
+	        nextSeq = id + 1;
 	    }
 	    String nextIdNum = String.format("%05d", nextSeq);
 	    String userId = year+nextIdNum;
 		UserBean user = new UserBean(userId,pass, name, address);
 		try {
-			UserDao.Insert(user);
+			if(UserDao.Insert(user) == 0) {
+				throw new SQLException("追加に失敗");
+				
+			}
 		} catch (ClassNotFoundException e) {
+			System.out.println("UserDao.Insert->InsertにてClassNotFoundException");
 			e.printStackTrace();
 			return null;
 		} catch (SQLException e) {
-			e.printStackTrace();
 			System.out.println("UserDao.Insert->SQLエラーが発生しました");
+			e.printStackTrace();
 			return null;
 		}
-		return UserDao.certificate(userId, name);
+		return UserDao.certificate(userId, pass);
 	}
 	/**
 	 * 引数を基に会議室を追加します
@@ -315,6 +328,7 @@ public class MeetingRoom {
 		try {
 			room = RoomDao.insertRoom(floor, name);
 			if(room != null) {
+				this.reloadRoom();
 				return room;
 			}else {
 				return null;
@@ -323,6 +337,40 @@ public class MeetingRoom {
 			e.printStackTrace();
 			return null;
 		}
+	}
+	/**
+	 * 会議室情報を再読み込みします
+	 */
+	private void reloadRoom() {
+		try {
+			this.rooms = RoomDao.findAll();
+		} catch (Exception e) {
+			System.err.println("MetingRoom->コンストラクタ : RoomDao.findAll()にて例外をキャッチしました\n" + e);
+			this.rooms = null;
+		}
+	}
+	/**
+	 * 
+	 * @param pass 更新後のパスワード
+	 * @param name 更新後の名前
+	 * @param address 更新後の住所
+	 * @return 更新の成否
+	 */
+	public boolean UserUpdate(String pass, String name, String address) {
+		UserBean newUser = new UserBean(this.user.getId(),pass,name,address);
+		try {
+			UserDao.Update(newUser);
+		}catch(ClassNotFoundException e) {
+			System.out.println("MeetingRoom.UserUpdate->UserDao.Update()にてClassNotFoundException");
+			e.printStackTrace();
+			return false;
+		}catch(SQLException e) {
+			System.out.println("MeetingRoom.UserUpdate->UserDao.Update()にてSQLException");
+			e.printStackTrace();
+			return false;
+		}
+		this.user = newUser;
+		return true;
 	}
 
 	public String toString() {//toString
