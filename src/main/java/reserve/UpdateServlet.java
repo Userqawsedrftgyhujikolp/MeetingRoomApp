@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.MeetingRoom;
-import bean.UserBean;
 
 @WebServlet("/UpdateServlet")
 public class UpdateServlet extends HttpServlet {
@@ -25,11 +24,11 @@ public class UpdateServlet extends HttpServlet {
 		String upPass = request.getParameter("password");
 		String upName = request.getParameter("name");
 		String upAddress = request.getParameter("address");
-		MeetingRoom mr = new MeetingRoom();
-		UserBean userb = mr.InsertUser(upPass, upName, upAddress);
+		MeetingRoom mr = (MeetingRoom) session.getAttribute("meetingRoom");
+		//MeetingRoomクラスのメソッドを使用
+		boolean userb = mr.UserUpdate(upPass, upName, upAddress);
 		//更新に成功したらセッション属性に入れて、画面へフォワード
 		session.setAttribute("userUp", userb);
-		mr.login(userb.getId(), userb.getPassword());
 		session.setAttribute("meetingRoom", mr);
 		RequestDispatcher rdp = request.getRequestDispatcher("UpdateResult.jsp");
 		rdp.forward(request, response);
