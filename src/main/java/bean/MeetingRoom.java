@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 
 import dao.ReservationDao;
 import dao.RoomDao;
@@ -386,6 +387,19 @@ public class MeetingRoom {
 		}
 		this.user = newUser;
 		return true;
+	}
+	/**
+	 * 配列内のIDを持つユーザーの名前の入ったMapを返します
+	 * @param idList
+	 * @return
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
+	public Map<String,String> findUser(String[] idList) throws ClassNotFoundException, SQLException {
+		if(idList.length == 0) {
+			return null;
+		}
+		return UserDao.getUsers(idList);
 	}
 
 	public String toString() {//toString

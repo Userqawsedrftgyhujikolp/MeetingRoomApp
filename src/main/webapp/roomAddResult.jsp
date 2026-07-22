@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>会議室追加</title>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/style.css">
 </head>
 <body>
 	<h1>会議室追加</h1>
