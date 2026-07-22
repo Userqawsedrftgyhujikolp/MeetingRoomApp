@@ -42,7 +42,7 @@ RoomBean[] rb = mr.getRooms();
 			String[] jikan = MeetingRoom.getPeriod();
 			for (int t = 0; t < jikan.length; t++) {
 			%>
-			<td class="table"><%=jikan[t]%></td>
+			<th class="table"><%=jikan[t]%></th>
 			<%
 			}
 			%>
@@ -51,7 +51,7 @@ RoomBean[] rb = mr.getRooms();
 		for (int r = 0; r < reserve.length; r++) {
 		%>
 		<tr class="table">
-			<th class="table"><%=Util.cropString(rb[r].getName())%></th>
+			<td class="table"><%=Util.cropString(rb[r].getName())%></td>
 			<%
 			for (int p = 0; p < reserve[r].length; p++) {
 			%>
@@ -83,7 +83,7 @@ RoomBean[] rb = mr.getRooms();
 	</table>
 	<hr>
 	<form action="menu.jsp" method="post">
-		<input type="submit" value="戻る">
+		<input type="submit" class=yohaku value="戻る">
 	</form>
 
 </body>
