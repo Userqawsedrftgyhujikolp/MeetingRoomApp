@@ -10,9 +10,9 @@
 <body>
 <h1>新規登録</h1>
 	<form action="<%=request.getContextPath()%>/AddServlet" method="post">
-		<label>名前：</label><input type="text" name="name"><br>
-		<label>パスワード：</label><input type="password" name="password"><br>
-		<label>住所：</label><input type="text" name="address"><br>
+		<label>名前：</label><input type="text" name="name" maxlength="10" placeholder="10文字以下" required><br>
+		<label>パスワード：</label><input type="password" name="password" minlength="6" maxlength="10" placeholder="6～10文字" required><br>
+		<label>住所：</label><input type="text" name="address" maxlength="30" placeholder="30文字以下" required><br>
 		<input type="submit" value="登録">
 		</form>
 </body>
