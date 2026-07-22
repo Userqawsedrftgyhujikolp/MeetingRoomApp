@@ -10,7 +10,7 @@
 <body>
 	<h1>会議室追加</h1>
 	追加する会議室の情報を入力してください
-	<form actiom="<%=request.getContextPath() %>/RoomAdd" method="post">
+	<form action="<%=request.getContextPath() %>/RoomAdd" method="post">
 		階層<select name="floor" requied>
 			<%for(int i=1; i <= story; i++){%>
 				<option value="<%=i%>"><%=i%>階</option>
