@@ -35,6 +35,10 @@ for (String key : keys) {
 		method="post">
 		<input type="submit" value="予約の確認">
 	</form>
+	<form action="<%=request.getContextPath()%>/UpdateServlet"
+		method="post">
+		<input type="submit" value="アカウントの編集">
+	</form>
 	<%if(mr.getUser().isAdmin()){//管理者用メニュー%>
 	<div class="admin">
 		管理者用ツール
