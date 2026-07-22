@@ -108,4 +108,14 @@ public class UserDao {
 			}
 		}
 	}
+	public static int Update(UserBean user) throws ClassNotFoundException, SQLException {
+		String sql = "UPDATE user SET password = ? , name = ? , address = ? WHERE id = ?";
+		Connection conn = ConnectionProvider.getConnection();
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1,user.getPassword());
+		pstmt.setString(2,user.get);
+		
+		
+		
+	}
 }
