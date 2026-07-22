@@ -104,7 +104,7 @@ public class UserDao {
 					int MaxId = rs.getInt("id");
 					return MaxId;
 				}
-				throw new Exception();
+				return 0;
 			}
 		}
 	}
