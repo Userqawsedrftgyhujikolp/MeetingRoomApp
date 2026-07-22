@@ -51,7 +51,8 @@ body {
 }
 
 .ybotan {
-	background-color: powderblue;
+	background-color: #1c81fc;
+	color: white;
 	width: 59px;
 	height: 29.8px;
 }
@@ -70,6 +71,8 @@ body {
 }
 
 .table td button[disabled] {
+	background-color:red;
+	color: white;
 	display: block;
 	width: 100%;
 	height: 30px;
