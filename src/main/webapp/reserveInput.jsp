@@ -20,7 +20,6 @@ ReservationBean[][] reserve = mr.getReservations();
 </head>
 <body>
 	<h1>会議室予約</h1>
-	<br>
 	<hr>
 	<h2>利用日</h2>
 	<form action="<%=request.getContextPath()%>/ChangeDate" method="post">
@@ -30,7 +29,7 @@ ReservationBean[][] reserve = mr.getReservations();
 	<h2>予約可能時間(${Util.htmlSpecialChars(meetingRoom.user.name)})</h2>
 	<table class="table background">
 		<tr class="table">
-			<th class="table">会議室/時間帯</th>
+			<th class="table">会議室名&bsol;時間帯</th>
 			<%
 			for (int i = 0; i < mr.getPeriod().length; i++) {
 			%>
@@ -75,7 +74,7 @@ ReservationBean[][] reserve = mr.getReservations();
 	</table>
 	<hr>
 	<form action="menu.jsp">
-		<input type="submit" value="戻る">
+		<input type="submit" class="yohaku" value="戻る">
 	</form>
 </body>
 </html>
