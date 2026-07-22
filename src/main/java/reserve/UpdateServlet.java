@@ -27,18 +27,24 @@ public class UpdateServlet extends HttpServlet {
 		String upAddress = request.getParameter("address");
 		MeetingRoom mr = (MeetingRoom) session.getAttribute("meetingRoom");
 		//MeetingRoomクラスのメソッドを使用
-		if (mr.UserUpdate(upPass, upName, upAddress)) {
-			//更新に成功したらセッション属性に入れて、画面へフォワード
-			request.setAttribute("userUp", mr.getUser());
-			request.setAttribute("meetingRoom", mr);
-			RequestDispatcher rdp = request.getRequestDispatcher("UpdateResult.jsp");
+		try {
+			if (mr.UserUpdate(upPass, upName, upAddress)) {
+				//更新に成功したらセッション属性に入れて、画面へフォワード
+				request.setAttribute("userUp", mr.getUser());
+				request.setAttribute("meetingRoom", mr);
+				RequestDispatcher rdp = request.getRequestDispatcher("UpdateResult.jsp");
+				rdp.forward(request, response);
+			} else {
+				request.getRequestDispatcher("UpdateError.jsp").forward(request, response);
+				//				String nextPage;
+				//				nextPage = request.getContextPath() + "/UpdateError.jsp";
+				//				response.sendRedirect(nextPage);
+			}
+		} catch (Exception e) {
+			request.setAttribute("error", e.getMessage());
+			RequestDispatcher rdp = request.getRequestDispatcher("/UpdateError.jsp");
 			rdp.forward(request, response);
-		} else {
-			String nextPage;
-			nextPage = request.getContextPath() + "/UpdateError.jsp";
-			response.sendRedirect(nextPage);
+
 		}
-
 	}
-
 }
