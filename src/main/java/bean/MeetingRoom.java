@@ -328,6 +328,7 @@ public class MeetingRoom {
 		try {
 			room = RoomDao.insertRoom(floor, name);
 			if(room != null) {
+				this.reloadRoom();
 				return room;
 			}else {
 				return null;
@@ -336,6 +337,23 @@ public class MeetingRoom {
 			e.printStackTrace();
 			return null;
 		}
+	}
+	/**
+	 * 会議室情報を再読み込みします
+	 */
+	private void reloadRoom() {
+		try {
+			this.rooms = RoomDao.findAll();
+		} catch (Exception e) {
+			System.err.println("MetingRoom->コンストラクタ : RoomDao.findAll()にて例外をキャッチしました\n" + e);
+			this.rooms = null;
+		}
+	}
+	/**
+	 * ログイン中のユーザー情報を再読み込みします
+	 */
+	private void reloadUser() {
+		
 	}
 
 	public String toString() {//toString

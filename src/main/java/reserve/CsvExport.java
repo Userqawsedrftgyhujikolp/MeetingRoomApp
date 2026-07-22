@@ -43,7 +43,7 @@ public class CsvExport extends HttpServlet {
 		}
 		response.setContentType("text/csv");
 		response.setCharacterEncoding(charset);
-		String attachment = "attachment; filename=\"" + mr.getDate() + "data.csv\"";
+		String attachment = "attachment; filename=\"" + mr.getDate() + ".csv\"";
 		response.setHeader("Content-Disposition", attachment);
 		ReservationBean[][] reservations = mr.getReservations();
 		try (PrintWriter writer = response.getWriter()) {
