@@ -113,9 +113,9 @@ public class UserDao {
 		Connection conn = ConnectionProvider.getConnection();
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1,user.getPassword());
-		pstmt.setString(2,user.get);
-		
-		
-		
+		pstmt.setString(2,user.getName());
+		pstmt.setString(3,user.getAddress());
+		pstmt.setString(4,user.getId());
+		return pstmt.executeUpdate();
 	}
 }
