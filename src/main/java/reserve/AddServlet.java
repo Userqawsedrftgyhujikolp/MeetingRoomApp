@@ -29,7 +29,7 @@ public class AddServlet extends HttpServlet {
 		String addAddress = request.getParameter("address");
 		MeetingRoom mr = new MeetingRoom();
 		try {
-			UserBean userb = mr.InsertUser(addPass, addName, addAddress);//ここで起きてる
+			UserBean userb = mr.InsertUser(addPass, addName, addAddress);
 			if(userb == null) {
 				throw new Exception();
 			}
