@@ -10,9 +10,9 @@
 <body>
 <h1>アカウントの変更</h1>
 	<form action="<%=request.getContextPath()%>/UpdateServlet" method="post">
-		<label>名前：</label><input type="text" name="name" value= ${meetingRoom.user.name }><br>
-		<label>パスワード：</label><input type="password" name="password" value= ${meetingRoom.user.password }><br>
-		<label>住所：</label><input type="text" name="address" value= ${meetingRoom.user.address }><br>
+		<label>名前：<input type="text" name="name" value="${meetingRoom.user.name }" maxlength="10" placeholder="10文字以下" required></label><br>
+		<label>パスワード：<input type="password" name="password" value="${meetingRoom.user.password }" minlength="6" maxlength="10" placeholder="6～10文字" required></label><br>
+		<label>住所：<input type="text" name="address" value="${meetingRoom.user.address }" maxlength="30" placeholder="30文字以下" required></label><br>
 		<input type="submit" value="更新">
 	</form>
 	<form action="<%=request.getContextPath()%>/menu.jsp" method="post">

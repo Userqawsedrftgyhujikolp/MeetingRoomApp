@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>退会確認</title>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/style.css">
 </head>
 <body>
 	<h1>ユーザー削除</h1>
