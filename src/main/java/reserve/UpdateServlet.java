@@ -35,7 +35,7 @@ public class UpdateServlet extends HttpServlet {
 			rdp.forward(request, response);
 		} else {
 			String nextPage;
-			nextPage = request.getContextPath() + "/UpdateInput.jsp";
+			nextPage = request.getContextPath() + "/UpdateError.jsp";
 			response.sendRedirect(nextPage);
 		}
 
