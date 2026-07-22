@@ -48,7 +48,7 @@ public class AddServlet extends HttpServlet {
 			rdp.forward(request, response);
 		} catch (Exception e) {
 			//その他失敗時・エラー時
-			request.setAttribute("error", "追加できませんでした"+e);
+			request.setAttribute("error", "追加できませんでした"+e.getMessage());
 			e.printStackTrace();
 			RequestDispatcher rdp = request.getRequestDispatcher("AddError.jsp");
 			UserBean useradd = new UserBean(null, addPass, addName, addAddress);

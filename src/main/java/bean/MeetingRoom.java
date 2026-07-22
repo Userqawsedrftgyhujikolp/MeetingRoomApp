@@ -273,6 +273,9 @@ public class MeetingRoom {
 		if(pass.length() < 6) {
 			throw new IllegalArgumentException("パスワードが6文字未満です");
 		}
+		if(pass.length() > 10) {
+			throw new IllegalArgumentException("パスワードが10文字を超えています");
+		}
 		SimpleDateFormat sdf = new SimpleDateFormat("yy");
 		Calendar cl = Calendar.getInstance();
 		String year = sdf.format(cl.getTime());
@@ -357,6 +360,18 @@ public class MeetingRoom {
 	 * @return 更新の成否
 	 */
 	public boolean UserUpdate(String pass, String name, String address) {
+		if(name.length() > 10) {
+			throw new IllegalArgumentException("名前が10文字を超えています");
+		}
+		if(address.length() > 30) {
+			throw new IllegalArgumentException("名前が10文字を超えています");
+		}
+		if(pass.length() < 6) {
+			throw new IllegalArgumentException("パスワードが6文字未満です");
+		}
+		if(pass.length() > 10) {
+			throw new IllegalArgumentException("パスワードが10文字を超えています");
+		}
 		UserBean newUser = new UserBean(this.user.getId(),pass,name,address);
 		try {
 			UserDao.Update(newUser);
