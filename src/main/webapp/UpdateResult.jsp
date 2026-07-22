@@ -17,15 +17,15 @@
 <table>
 	<tr>
 		<th>名前</th>
-		<td>${useradd.name}</td>
+		<td>${userUp.name}</td>
 	</tr>
 	<tr>
 		<th>パスワード</th>
-		<td>${useradd.password}</td>
+		<td>${userUp.password}</td>
 	</tr>
 	<tr>
 		<th>住所</th>
-		<td>${useradd.address}</td>
+		<td>${userUp.address}</td>
 	</tr>
 </table>
 	<hr>
