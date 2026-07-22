@@ -37,7 +37,7 @@ for (String key : keys) {
 	</form>
 	<form action="<%=request.getContextPath()%>/UpdateInput.jsp"
 		method="post">
-		<input type="submit" value="アカウントの編集">
+		<input type="submit" value="アカウントの変更">
 	</form>
 	<%if(mr.getUser().isAdmin()){//管理者用メニュー%>
 	<div class="admin">
