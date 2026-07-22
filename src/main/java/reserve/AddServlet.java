@@ -27,21 +27,32 @@ public class AddServlet extends HttpServlet {
 		String addPass = request.getParameter("password");
 		String addName = request.getParameter("name");
 		String addAddress = request.getParameter("address");
+		MeetingRoom mr = new MeetingRoom();
 		try {
-			MeetingRoom mr = (MeetingRoom) session.getAttribute("meetingRoom");
-			UserBean userb = mr.InsertUser(addPass, addName, addAddress);
+			UserBean userb = mr.InsertUser(addPass, addName, addAddress);//ここで起きてる
+			if(userb == null) {
+				throw new Exception();
+			}
 			//追加に成功したらセッション属性に入れて、画面へフォワード
 			session.setAttribute("useradd", userb);
+			mr.login(userb.getId(), userb.getPassword());
+			session.setAttribute("meetingRoom", mr);
 			RequestDispatcher rdp = request.getRequestDispatcher("AddOut.jsp");
 			rdp.forward(request, response);
-		} catch (IOException e) {
-			request.setAttribute("error", "6文字以上のパスワードに設定してください");
+		}catch(IllegalArgumentException e) {
+			System.out.println("パスワードが6文字未満です");
+			e.printStackTrace();
 			RequestDispatcher rdp = request.getRequestDispatcher("AddError.jsp");
+			UserBean useradd = new UserBean(null, addPass, addName, addAddress);
+			request.setAttribute("useradd", useradd);
 			rdp.forward(request, response);
 		} catch (Exception e) {
 			//その他失敗時・エラー時
-			request.setAttribute("error", "追加できませんでした");
+			request.setAttribute("error", "追加できませんでした"+e);
+			e.printStackTrace();
 			RequestDispatcher rdp = request.getRequestDispatcher("AddError.jsp");
+			UserBean useradd = new UserBean(null, addPass, addName, addAddress);
+			request.setAttribute("useradd", useradd);
 			rdp.forward(request, response);
 		}
 	}
