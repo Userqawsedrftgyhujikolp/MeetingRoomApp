@@ -10,6 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <title>予約確認</title>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/style.css">
 </head>
 <body>
 	<h1>あなたの予約</h1>
@@ -21,7 +22,7 @@
 			String roomId = reserv.getRoomId();
 	%>
 	<hr>
-	<table>
+	<table class="margin">
 		<tr>
 			<th>予約番号</th>
 			<td><%=reserv.getId()%></td>
