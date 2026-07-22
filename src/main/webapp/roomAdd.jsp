@@ -16,7 +16,7 @@
 				<option value="<%=i%>"><%=i%>階</option>
 			<%}%>
 		</select><br>
-		会議室名<input type="text" name="name" required><br>
+		会議室名<input type="text" name="name" maxlength="20" required><br>
 		<input type="submit" value="追加"> 
 	</form>
 </body>
