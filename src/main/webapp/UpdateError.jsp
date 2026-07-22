@@ -28,7 +28,7 @@
 	</tr>
 	<tr>
 		<th>住所</th>
-		<td>${userd.address}</td>
+		<td>${userb.address}</td>
 	</tr>
 </table>
 	<hr>
