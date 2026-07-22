@@ -35,7 +35,7 @@ for (String key : keys) {
 		method="post">
 		<input type="submit" value="予約の確認">
 	</form>
-	<form action="<%=request.getContextPath()%>/UpdateServlet"
+	<form action="<%=request.getContextPath()%>/UpdateInput.jsp"
 		method="post">
 		<input type="submit" value="アカウントの編集">
 	</form>

@@ -29,12 +29,15 @@ public class RoomAddConfirm extends HttpServlet {
 		MeetingRoom mr = (MeetingRoom)session.getAttribute("meetingRoom");
 		
 		RoomBean room = (RoomBean)session.getAttribute("room");
+		session.removeAttribute("room");
 		RoomBean newRoom = mr.insertRoom(room.getId(), room.getName());
 		if(newRoom != null) {
 			request.setAttribute("room", newRoom);
+			request.setAttribute("tDis", "ID");
 			request.setAttribute("message", "追加に成功しました");
 		}else {
 			request.setAttribute("room", room);
+			request.setAttribute("tDis", "階");
 			request.setAttribute("message", "追加に失敗しました");
 		}
 		

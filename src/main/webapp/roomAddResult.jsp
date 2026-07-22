@@ -11,7 +11,7 @@
 	<hr>
 	${message }
 	<table>
-	<tr><th>id</th><td>${room.id }</td></tr>
+	<tr><th>${tDis }</th><td>${room.id }</td></tr>
 	<tr><th>会議室名</th><td>${room.name }</td></tr>
 	</table>
 	<hr>
