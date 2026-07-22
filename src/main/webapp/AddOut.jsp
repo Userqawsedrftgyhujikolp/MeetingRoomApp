@@ -12,9 +12,10 @@
 </head>
 <body>
 	<h1>ようこそ、${useradd.name}さん</h1>
-		<label>名前：${useradd.name}</label><br>
-		<label>ID：${useradd.password}</label><br>
-		<label>住所：${useradd.address}</label><br>
+		ID：${useradd.name}<br>
+		名前：${useradd.name}<br>
+		パスワード：${useradd.password}<br>
+		住所：${useradd.address}<br>
 	<form action="<%= request.getContextPath()%>/menu.jsp" method="post">
     <input type="submit" value="完了">
     </form>
