@@ -13,7 +13,7 @@
 	会議室情報を確認してください
 	<table>
 	<tr><th>階</th><td>${room.id }</td></tr>
-	<tr><th>会議室名</th><td>${room.name }</td></tr>
+	<tr><th>会議室名</th><td>${Util.htmlSpecialChars(room.name) }</td></tr>
 	</table>
 	${message }
 	<a href="<%=request.getContextPath() %>/RoomAddConfirm">

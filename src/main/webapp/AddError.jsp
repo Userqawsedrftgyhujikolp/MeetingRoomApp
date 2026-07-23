@@ -20,15 +20,15 @@
 <table>
 	<tr>
 		<th>名前</th>
-		<td>${useradd.name}</td>
+		<td>${Util.htmlSpecialChars(useradd.name)}</td>
 	</tr>
 	<tr>
 		<th>パスワード</th>
-		<td>${useradd.password}</td>
+		<td>${Util.htmlSpecialChars(useradd.password)}</td>
 	</tr>
 	<tr>
 		<th>住所</th>
-		<td>${useradd.address}</td>
+		<td>${Util.htmlSpecialChars(useradd.address)}</td>
 	</tr>
 </table>
 	<hr>
