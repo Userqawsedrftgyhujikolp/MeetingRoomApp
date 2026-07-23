@@ -34,25 +34,11 @@
 	<hr>
 
 	<br>
-	<%--	
 	<div class="button">
-		<form action="<%=request.getContextPath()%>/ReservationServlet"
-			method="post">
-			<input type="submit" value="決定">
-		</form>
-		<form action="<%=request.getContextPath()%>/reserveInput.jsp"
-			method="post">
-			<input type="submit" value="戻る">
-		</form>
-	</div>
---%>
-	<div class="button">
-		<form method="post">
-			<input type="submit"
-				formaction="<%=request.getContextPath()%>/ReservationServlet"
-				value="決定"> <input type="submit"
-				formaction="<%=request.getContextPath()%>/reserveInput.jsp"
-				value="戻る">
+		<form action="<%=request.getContextPath()%>/ReservationServlet" method="post">
+				<input type="submit"value="決定"  > 
+		<form action="<%=request.getContextPath()%>/reserveInput.jsp" method="post">
+				<input type="submit" value="戻る">
 		</form>
 	</div>
 </body>

@@ -16,7 +16,9 @@ import bean.ReservationBean;
 @WebServlet("/ReserveCreate")
 public class ReserveCreateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.sendRedirect(request.getContextPath()+"/menu.jsp");
+	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		//		リクエストで受信した文字をUTF-8文字コードで受信する

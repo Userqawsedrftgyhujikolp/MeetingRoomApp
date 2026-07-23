@@ -31,22 +31,20 @@ public class ConfirmServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		request.setCharacterEncoding("UTF-8");
-		HttpSession session = request.getSession();
-		MeetingRoom mr = (MeetingRoom)session.getAttribute("meetingRoom");
-		ReservationBean[] reserv = mr.ConfirmReservation();
-		request.setAttribute("reservs", reserv);
-		request.getRequestDispatcher("confirm.jsp").forward(request, response);
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.sendRedirect(request.getContextPath()+"/menu.jsp");
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		request.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession();
+		MeetingRoom mr = (MeetingRoom)session.getAttribute("meetingRoom");
+		ReservationBean[] reserv = mr.ConfirmReservation();
+		request.setAttribute("reservs", reserv);
+		request.getRequestDispatcher("confirm.jsp").forward(request, response);
 	}
 
 }

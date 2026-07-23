@@ -30,9 +30,8 @@ public class UserDelConfirm extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		request.setCharacterEncoding("UTF-8");
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		MeetingRoom mr = (MeetingRoom)session.getAttribute("meetingRoom");
 		mr.deleteUser();
@@ -45,7 +44,12 @@ public class UserDelConfirm extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		request.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession();
+		MeetingRoom mr = (MeetingRoom)session.getAttribute("meetingRoom");
+		mr.deleteUser();
+		session.removeAttribute("meetingRoom");
+		request.getRequestDispatcher("userDeleted.jsp").forward(request, response);
 	}
 
 }

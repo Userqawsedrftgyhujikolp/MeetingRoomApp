@@ -25,8 +25,8 @@ public class LogoutServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// login.jsp へリダイレクトする処理を呼び出す
-		doPost(request, response);
+		// login.jsp へリダイレクトする処理
+		response.sendRedirect(request.getContextPath() + "/login.jsp");
 	}
 
 }
