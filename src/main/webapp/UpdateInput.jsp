@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,3 +20,12 @@
 	</form>
 </body>
 </html>
+<%-- <div class="button">
+		<form method="post">
+			<input type="submit"
+				formaction="<%=request.getContextPath()%>/ReservationServlet"
+				value="決定"> <input type="submit"
+				formaction="<%=request.getContextPath()%>/menu.jsp"
+				value="戻る">
+		</form>
+	</div> --%>
