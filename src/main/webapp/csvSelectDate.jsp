@@ -12,6 +12,7 @@
 <head>
 <meta charset="UTF-8">
 <title>CSV出力</title>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/style.css">
 </head>
 <body>
 	<h1>CSV出力</h1>

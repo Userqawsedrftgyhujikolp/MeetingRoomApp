@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 import bean.UserBean;
 
@@ -108,14 +110,50 @@ public class UserDao {
 			}
 		}
 	}
+
 	public static int Update(UserBean user) throws ClassNotFoundException, SQLException {
 		String sql = "UPDATE user SET password = ? , name = ? , address = ? WHERE id = ?";
-		Connection conn = ConnectionProvider.getConnection();
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1,user.getPassword());
-		pstmt.setString(2,user.getName());
-		pstmt.setString(3,user.getAddress());
-		pstmt.setString(4,user.getId());
-		return pstmt.executeUpdate();
+		try (Connection conn = ConnectionProvider.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, user.getPassword());
+			pstmt.setString(2, user.getName());
+			pstmt.setString(3, user.getAddress());
+			pstmt.setString(4, user.getId());
+			return pstmt.executeUpdate();
+		}
+	}
+	
+	/**
+	 * 配列内のIDのユーザー情報を取得します
+	 * @param ids 検索したいユーザーのIDの入った配列
+	 * @return 検索結果
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
+	public static Map<String,String> getUsers(String[] idlis) throws SQLException, ClassNotFoundException {
+		if(idlis.length == 0) {
+			throw new IllegalArgumentException("配列の中身がありません");
+		}
+		Map<String,String> userList = new HashMap<>();
+		String sql = "SELECT * FROM user WHERE id IN (";
+		for(String i:idlis) {
+			sql += "?, ";
+		}
+		sql = sql.substring(0, sql.length() - 2);
+		sql += ")";
+		try (Connection conn = ConnectionProvider.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			for(int i=0;i<idlis.length;i++) {
+				pstmt.setString(i+1, idlis[i]);
+			}
+			try (ResultSet rs = pstmt.executeQuery()) {
+				while (rs.next()) {
+					String id = rs.getString("id");
+					String name = rs.getString("name");
+					userList.put(id, name);
+				}
+			}
+		}
+		return userList;
 	}
 }

@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>退会</title>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/style.css">
 </head>
 <body>
 	<h1>退会処理</h1>
