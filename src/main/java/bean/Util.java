@@ -20,6 +20,13 @@ public class Util {
 		return str;
 	}
 	
+	private static String escapeDQuot(String str) {
+		if(str != null) {
+			str = str.replace("\"", "&quot;");
+		}
+		return str;
+	}
+	
 	/**
 	 * 引数として与えられた文字列を7文字まで減らします
 	 * 引数が6文字以下の場合はそのまま、7文字以上の場合は5文字目の後に"…"を入れ以降を削除します	 
@@ -34,7 +41,7 @@ public class Util {
 		if (str.length() <= length) {
 			return htmlSpecialChars(str);
 		} else {
-			return "<span title=\""+str+"\">"+htmlSpecialChars(str.substring(0, (length -1))) + "…</span>";
+			return "<span title=\""+escapeDQuot(str)+"\">"+htmlSpecialChars(str.substring(0, (length -1))) + "…</span>";
 		}
 	}
 	
