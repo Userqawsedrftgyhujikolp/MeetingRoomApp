@@ -9,6 +9,7 @@
 </head>
 <body>
 	<h1>退会処理</h1>
+	
 	退会しました<br>
 	<a href="<%=request.getContextPath() %>/login.jsp"><button>ログイン画面に戻る</button></a>
 </body>
