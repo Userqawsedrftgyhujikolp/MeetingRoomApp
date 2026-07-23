@@ -27,7 +27,8 @@
 	<hr>
 	<main style="margin: 100px auto;">
 	<p>お探しのページは見つかりませんでした</p>
-	<p><%=Util.htmlSpecialChars(request.getRequestURI()) %></p>
+	<p>${Util.htmlSpecialChars(requestScope["javax.servlet.forward.request_uri"])}</p>
+	
 	</main>
 	<hr>
 	<a href="<%=request.getContextPath() %>/menu.jsp"><button>メニュー画面に戻る</button></a>
