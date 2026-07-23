@@ -62,11 +62,11 @@ ReservationBean[][] reserv = mr.getReservations();
 		}
 		%>
 	</table>
-	<form action="<%=request.getContextPath()%>/CsvExport">
+	<form action="<%=request.getContextPath()%>/CsvExport" method="post">
 		<input type="hidden" name="char" value="UTF-8"> <input
 			type="submit" value="UTF-8で取得">
 	</form>
-	<form action="<%=request.getContextPath()%>/CsvExport">
+	<form action="<%=request.getContextPath()%>/CsvExport" method="post">
 		<input type="hidden" name="char" value="MS932"> <input
 			type="submit" value="Shift-JISで取得">
 	</form>

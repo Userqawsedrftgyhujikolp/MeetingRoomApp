@@ -31,7 +31,12 @@ public class UserDelConfirm extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect(request.getContextPath()+"/menu.jsp");
+    	request.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession();
+		MeetingRoom mr = (MeetingRoom)session.getAttribute("meetingRoom");
+		mr.deleteUser();
+		session.removeAttribute("meetingRoom");
+		request.getRequestDispatcher("userDeleted.jsp").forward(request, response);
 	}
 
 	/**

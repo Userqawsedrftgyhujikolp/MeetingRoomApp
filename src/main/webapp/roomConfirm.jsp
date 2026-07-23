@@ -16,8 +16,8 @@
 	<tr><th>会議室名</th><td>${Util.htmlSpecialChars(room.name) }</td></tr>
 	</table>
 	${message }
-	<a href="<%=request.getContextPath() %>/RoomAddConfirm">
-	<input type="button" value="追加">
-	</a>
+	<form action="<%=request.getContextPath() %>/RoomAddConfirm" method="post">
+	<input type="submit" value="追加">
+	</form>
 </body>
 </html>
