@@ -20,7 +20,7 @@ public class Util {
 		return str;
 	}
 	
-	private static String escapeDQuot(String str) {
+	public static String escapeDQuot(String str) {
 		if(str != null) {
 			str = str.replace("\"", "&quot;");
 		}
