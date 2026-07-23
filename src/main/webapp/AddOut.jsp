@@ -12,7 +12,7 @@
 </head>
 <body>
 	<h1>ようこそ、${Util.htmlSpecialChars(useradd.name)}さん</h1>
-		ID：${useradd.name}<br>
+		ID：${useradd.id}<br>
 		名前：${Util.htmlSpecialChars(useradd.name)}<br>
 		パスワード：${Util.htmlSpecialChars(useradd.password)}<br>
 		住所：${Util.htmlSpecialChars(useradd.address)}<br>
