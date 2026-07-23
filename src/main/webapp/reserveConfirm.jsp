@@ -37,6 +37,7 @@
 	<div class="button">
 		<form action="<%=request.getContextPath()%>/ReservationServlet" method="post">
 				<input type="submit"value="決定"  > 
+		</form>		
 		<form action="<%=request.getContextPath()%>/reserveInput.jsp" method="post">
 				<input type="submit" value="戻る">
 		</form>
