@@ -38,7 +38,10 @@ public class RoomAddServlet extends HttpServlet {
 		String num = request.getParameter("floor");
 		String roomName = request.getParameter("name");
 		MeetingRoom mr = (MeetingRoom)session.getAttribute("meetingRoom");
-		
+		if(num == null || roomName == null || num.isBlank() || roomName.isBlank()) {
+			response.sendRedirect(request.getContextPath()+"/roomAdd.jsp");
+			return;
+		}
 		RoomBean[] rooms = mr.getRooms();
 		for(RoomBean room: rooms) {
 			if(roomName.equals(room.getName())) {

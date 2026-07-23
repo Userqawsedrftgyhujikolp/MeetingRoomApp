@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import="bean.MeetingRoom"%>
+<%@ page import="bean.ReservationBean"%>
+<%@ page import="bean.RoomBean"%>
+<%@ page import="bean.UserBean"%>
+<%@ page import="bean.Util"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +18,7 @@
 	${message }
 	<table>
 	<tr><th>${tDis }</th><td>${room.id }</td></tr>
-	<tr><th>会議室名</th><td>$Util.htmlSpecialChars({room.name) }</td></tr>
+	<tr><th>会議室名</th><td>${Util.htmlSpecialChars(room.name) }</td></tr>
 	</table>
 	<hr>
 	<a href="<%=request.getContextPath() %>/roomAdd.jsp"><input type="button" value="会議室追加へ"></a>
