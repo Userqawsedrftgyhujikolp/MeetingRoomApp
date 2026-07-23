@@ -13,7 +13,7 @@
 	${message }
 	<table>
 	<tr><th>${tDis }</th><td>${room.id }</td></tr>
-	<tr><th>会議室名</th><td>${room.name }</td></tr>
+	<tr><th>会議室名</th><td>$Util.htmlSpecialChars({room.name) }</td></tr>
 	</table>
 	<hr>
 	<a href="<%=request.getContextPath() %>/roomAdd.jsp"><input type="button" value="会議室追加へ"></a>

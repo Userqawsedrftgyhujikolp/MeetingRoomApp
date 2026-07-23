@@ -21,15 +21,15 @@
 		</tr>
 		<tr>
 			<th>パスワード</th>
-			<td>${meetingRoom.user.password }</td>
+			<td>${Util.htmlSpecialChars(meetingRoom.user.password) }</td>
 		</tr>
 		<tr>
 			<th>名前</th>
-			<td>${meetingRoom.user.name }</td>
+			<td>${Util.htmlSpecialChars(meetingRoom.user.name) }</td>
 		</tr>
 		<tr>
 			<th>住所</th>
-			<td>${meetingRoom.user.address }</td>
+			<td>${Util.htmlSpecialChars(meetingRoom.user.address) }</td>
 		</tr>
 	</table>
 	<input type="button" value="退会" class="submit">
