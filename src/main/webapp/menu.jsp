@@ -50,9 +50,11 @@ for (String key : keys) {
 	<%if(mr.getUser().isAdmin()){//管理者用メニュー%>
 	<div class="admin">
 		管理者用ツール
+		<div class="margin-bottom">
 		<form action="<%=request.getContextPath()%>/roomAdd.jsp" method="post">
 			<input type="submit" value="会議室追加">
 		</form>
+		</div>
 		<form action="<%=request.getContextPath()%>/csvSelectDate.jsp" method="post">
 			<input type="submit" value="予約のCSV出力">
 		</form>
