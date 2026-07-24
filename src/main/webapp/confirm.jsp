@@ -22,7 +22,7 @@
 			String roomId = reserv.getRoomId();
 	%>
 	<hr>
-	<table>
+	<table class="margin">
 		<tr>
 			<th>予約番号</th>
 			<td><%=reserv.getId()%></td>
