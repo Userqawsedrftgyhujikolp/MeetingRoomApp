@@ -57,19 +57,21 @@ RoomBean[] rb = mr.getRooms();
 			%>
 			<td class="table">
 				<%
-				if (reserve[r][p] != null && reserve[r][p].getUserId().equals(mr.getUser().getId())) {
-				%>
-				<form action="<%=request.getContextPath()%>/CancelCreateServlet"
-					method="post">
+				if (reserve[r][p] != null){
+					if(reserve[r][p].getUserId().equals(mr.getUser().getId())) {
+					%>
+					<form action="<%=request.getContextPath()%>/CancelCreateServlet"
+						method="post">
 					<input type="hidden" name="roomId" value="<%=r%>"> <input
 						type="hidden" name="time" value="<%=p%>"> <input class="ybotan"
-						type="submit" value="<%=jikan[p]%>">
-				</form> <%
- } else {
- %> <input class="disabled" type="button" value="<%=jikan[p]%>" disabled>
-				<%
-				}
-				%>
+						type="submit" value="済">
+					</form> <%
+ 					}else{
+ 						%><input class="disabled" type="button" value="済" disabled><%
+ 					}
+				}else { %> 
+ 				<input class="disabled" type="button" value="空" disabled>
+				<%}%>
 			</td>
 			<%
 			}

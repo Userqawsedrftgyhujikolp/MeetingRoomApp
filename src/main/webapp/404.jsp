@@ -2,6 +2,12 @@
     pageEncoding="UTF-8"%>
     <%@ page import="bean.Util" %>
 <!DOCTYPE html>
+<%
+		String reqUrl = (String) request.getAttribute("javax.servlet.forward.request_uri");
+		if (reqUrl == null) {
+			reqUrl = request.getRequestURI();
+		}
+	%>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -27,7 +33,7 @@
 	<hr>
 	<main style="margin: 100px auto;">
 	<p>お探しのページは見つかりませんでした</p>
-	<p>${Util.htmlSpecialChars(requestScope["javax.servlet.forward.request_uri"])}</p>
+	<p><%=Util.htmlSpecialChars(reqUrl)%></p>
 	
 	</main>
 	<hr>
