@@ -23,22 +23,30 @@ for (String key : keys) {
 	<h1>会議室予約</h1>
 	<hr>
 	<h2>メニュー</h2>
+	<div class="margin-bottom">
 	<form action="<%=request.getContextPath()%>/reserveInput.jsp"
 		method="post">
 		<input type="submit" value="会議室予約">
 	</form>
+	</div>
+	<div class="margin-bottom">
 	<form action="<%=request.getContextPath()%>/cancelInput.jsp"
 		method="post">
 		<input type="submit" value="予約キャンセル">
 	</form>
+	</div>
+	<div class="margin-bottom">
 	<form action="<%=request.getContextPath()%>/Confirm"
 		method="post">
 		<input type="submit" value="予約の確認">
 	</form>
+	</div>
+	<div class="margin-bottom">
 	<form action="<%=request.getContextPath()%>/UpdateInput.jsp"
 		method="post">
 		<input type="submit" value="アカウント情報の変更">
 	</form>
+	</div>
 	<%if(mr.getUser().isAdmin()){//管理者用メニュー%>
 	<div class="admin">
 		管理者用ツール
@@ -51,7 +59,6 @@ for (String key : keys) {
 	</div>
 	<br>
 	<%} %>
-	
 	<form action="<%=request.getContextPath()%>/Logout" method="post">
 		<input type="submit" value="ログアウト">
 	</form>

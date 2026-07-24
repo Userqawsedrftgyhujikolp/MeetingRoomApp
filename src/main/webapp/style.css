@@ -2,19 +2,8 @@
 
 body {
 	text-align: center;
-	background: linear-gradient(to right, #f00, #fa0, #ff0, #0f0, #0ff, #00f, #808, #f00) 0 / 200% 100%;
-	animation: 5s moves linear infinite;
+	background: #84be8b;
 	height: 80px;
-}
-
-@keyframes moves {
-	0% {
-		background-position: 0%;
-	}
-
-	100% {
-		background-position: 200%;
-	}
 }
 
 .marginbottom {
@@ -95,6 +84,10 @@ body {
 
 .yohaku {
 	margin: 0 0 30px 0;
+}
+
+.margin-bottom {
+	margin-bottom:10px;
 }
 
 .margin {
