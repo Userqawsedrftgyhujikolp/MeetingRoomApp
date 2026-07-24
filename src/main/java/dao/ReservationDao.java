@@ -64,7 +64,7 @@ public class ReservationDao {
 	public static List<ReservationBean> findById(String userId, String date, String time) throws SQLException, ClassNotFoundException {
 		List<ReservationBean> rList = new ArrayList<ReservationBean>();
 		//データベース接続
-		String sql = "SELECT * FROM reservation WHERE userId = ? and (date > ? or (date = ? and start >= ?))";
+		String sql = "SELECT * FROM reservation WHERE userId = ? and (date > ? or (date = ? and start >= ?)) ORDER BY date ASC, start ASC";
 		try (Connection conn = ConnectionProvider.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			//プレースホルダーに値を設定
