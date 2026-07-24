@@ -73,5 +73,8 @@ ReservationBean[][] reserv = mr.getReservations();
 		<input type="submit" value="Shift-JISで取得">
 	</form>
 	</div>
+	<form action="<%=request.getContextPath()%>/menu.jsp">
+		<input type="submit" value="戻る">
+	</form>
 </body>
 </html>

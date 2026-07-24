@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.MeetingRoom;
+import bean.UserBean;
 
 @WebServlet("/UpdateServlet")
 public class UpdateServlet extends HttpServlet {
@@ -37,16 +38,14 @@ public class UpdateServlet extends HttpServlet {
 				RequestDispatcher rdp = request.getRequestDispatcher("UpdateResult.jsp");
 				rdp.forward(request, response);
 			} else {
+				request.setAttribute("userb",new UserBean(null, upPass, upName, upAddress));
 				request.getRequestDispatcher("UpdateError.jsp").forward(request, response);
-				//				String nextPage;
-				//				nextPage = request.getContextPath() + "/UpdateError.jsp";
-				//				response.sendRedirect(nextPage);
 			}
 		} catch (Exception e) {
 			request.setAttribute("error", e.getMessage());
+			request.setAttribute("userb",new UserBean(null, upPass, upName, upAddress));
 			RequestDispatcher rdp = request.getRequestDispatcher("/UpdateError.jsp");
 			rdp.forward(request, response);
-
 		}
 	}
 }

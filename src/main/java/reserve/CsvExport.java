@@ -35,8 +35,9 @@ public class CsvExport extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect(request.getContextPath()+"/menu.jsp");
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		response.sendRedirect(request.getContextPath() + "/menu.jsp");
 	}
 
 	/**
@@ -49,43 +50,53 @@ public class CsvExport extends HttpServlet {
 		MeetingRoom mr = (MeetingRoom) session.getAttribute("meetingRoom");
 		request.setCharacterEncoding("UTF-8");
 		String charset = request.getParameter("char");
+		if(mr == null || mr.getUser() == null || !mr.getUser().isAdmin()) {
+			response.sendRedirect(request.getContextPath()+"/login.jsp");
+			return;
+		}
 		if (charset == null) {
 			charset = "UTF-8";
+		}
+		ReservationBean[][] reservations = mr.getReservations();
+		List<String> idList = new ArrayList<String>();
+		boolean existReserv = false;
+		for (ReservationBean[] reservR : reservations) {
+			for (ReservationBean reserv : reservR) {
+				if (reserv != null) {
+					idList.add(String.valueOf(reserv.getUserId()));
+					existReserv = true;
+				}
+			}
+		}
+		Map<String, String> users=null;
+		try {
+			if(existReserv) {
+				 users = UserDao.getUsers(idList.toArray(new String[0]));
+			}
+		} catch (Exception e) {
+			response.sendRedirect(request.getContextPath()+"/CSVSelectDate.jsp");
+			e.printStackTrace();
+			return;
 		}
 		response.setContentType("text/csv");
 		response.setCharacterEncoding(charset);
 		String attachment = "attachment; filename=\"" + mr.getDate() + ".csv\"";
 		response.setHeader("Content-Disposition", attachment);
-		ReservationBean[][] reservations = mr.getReservations();
-		List<String> idList = new ArrayList<String>();
-		for (ReservationBean[] reservR : reservations) {
-			for (ReservationBean reserv : reservR) {
-				if (reserv != null) {
-					idList.add(String.valueOf(reserv.getUserId()));
-				}
-			}
-		}
-		try {
-			Map<String, String> users = UserDao.getUsers(idList.toArray(new String[0]));
-			try (PrintWriter writer = response.getWriter()) {
-				writer.println("予約番号,会議室,開始時刻,終了時刻,利用者");
-				for (ReservationBean[] reservR : reservations) {
-					for (ReservationBean reserv : reservR) {
-						if (reserv != null) {
-							//予約情報を書き込む
-							int id = reserv.getId();
-							String room = mr.getRoom(reserv.getRoomId()).getName();
-							String start = reserv.getStart();
-							String end = reserv.getEnd();
-							String user = users.get(reserv.getUserId());
-							writer.println(id + "," + room + "," + start + "," + end + "," + user);
-						}
+		try (PrintWriter writer = response.getWriter()) {
+			writer.println("予約番号,会議室,開始時刻,終了時刻,利用者");
+			for (ReservationBean[] reservR : reservations) {
+				for (ReservationBean reserv : reservR) {
+					if (reserv != null) {
+						//予約情報を書き込む
+						int id = reserv.getId();
+						String room = mr.getRoom(reserv.getRoomId()).getName();
+						String start = reserv.getStart();
+						String end = reserv.getEnd();
+						String user = (users.get(reserv.getUserId()));
+						writer.println(id + "," + room + "," + start + "," + end + "," + (user!=null?user:reserv.getUserId()));
 					}
 				}
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			return;
 		}
 	}
 
