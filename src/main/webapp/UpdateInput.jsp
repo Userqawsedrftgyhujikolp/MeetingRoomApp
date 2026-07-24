@@ -27,10 +27,12 @@
 				value="${Util.htmlSpecialChars(meetingRoom.user.address) }"
 				maxlength="30" placeholder="30文字以下" required></label><hr>
 			<div class="button">
-				<input type="submit" formaction="<%=request.getContextPath()%>/userDelete.jsp" value="退会">
+				<input type="submit" formaction="<%=request.getContextPath()%>/userDelete.jsp" value="退会" formnovalidate>
 				<input type="submit" value="更新">
 			</div>
-				<input type="submit" formaction="<%=request.getContextPath()%>/menu.jsp" value="戻る">
-	</form>
+		</form>
+		<form action="<%=request.getContextPath()%>/menu.jsp">
+			<input type="submit" value="戻る">
+		</form>
 </body>
 </html>
