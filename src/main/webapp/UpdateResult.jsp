@@ -16,16 +16,19 @@
 <h1>アカウント情報変更しました</h1>
 <table>
 	<tr>
+		<th>ID</th>
+		<td>${userUp.id }</td>
+	<tr>
 		<th>名前</th>
-		<td>${userUp.name}</td>
+		<td>${Util.htmlSpecialChars(userUp.name)}</td>
 	</tr>
 	<tr>
 		<th>パスワード</th>
-		<td>${userUp.password}</td>
+		<td>${Util.htmlSpecialChars(userUp.password)}</td>
 	</tr>
 	<tr>
 		<th>住所</th>
-		<td>${userUp.address}</td>
+		<td>${Util.htmlSpecialChars(userUp.address)}</td>
 	</tr>
 </table>
 	<hr>
