@@ -16,7 +16,7 @@
 	<h1>会議室追加</h1>
 	<hr>
 	${message }
-	<table>
+	<table class="margin">
 	<tr><th>${tDis }</th><td>${room.id }</td></tr>
 	<tr><th>会議室名</th><td>${Util.htmlSpecialChars(room.name) }</td></tr>
 	</table>

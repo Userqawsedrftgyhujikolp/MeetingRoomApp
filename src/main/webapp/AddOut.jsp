@@ -12,10 +12,12 @@
 </head>
 <body>
 	<h1>ようこそ、${Util.htmlSpecialChars(useradd.name)}さん</h1>
+	<hr>
 		ID：${useradd.id}<br>
 		名前：${Util.htmlSpecialChars(useradd.name)}<br>
 		パスワード：${Util.htmlSpecialChars(useradd.password)}<br>
 		住所：${Util.htmlSpecialChars(useradd.address)}<br>
+	<hr>	
 	<form action="<%= request.getContextPath()%>/menu.jsp" method="post">
     <input type="submit" value="完了">
     </form>
