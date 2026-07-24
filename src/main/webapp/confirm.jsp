@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/style.css">
 </head>
 <body>
-	<h1>あなたの予約</h1>
+	<h1>${Util.htmlSpecialChars(meetingRoom.user.name) }さんの予約</h1>
 	<%
 	MeetingRoom mr = (MeetingRoom) session.getAttribute("meetingRoom");
 	ReservationBean[] reservs = (ReservationBean[]) request.getAttribute("reservs");
