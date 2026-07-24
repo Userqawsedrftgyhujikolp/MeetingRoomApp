@@ -32,7 +32,12 @@
 			<td>${Util.htmlSpecialChars(meetingRoom.user.address) }</td>
 		</tr>
 	</table>
-	<input type="button" value="退会" class="submit">
+	<div class="button">
+		<input type="button" value="退会" class="submit">
+		<form action="<%=request.getContextPath()%>/UpdateInput.jsp">
+		<input type="submit"value="戻る">
+		</form>
+	</div>
 	<script>
 		function submit() {
 			if (confirm("*最終確認*\n本当に退会しますか？")) {
