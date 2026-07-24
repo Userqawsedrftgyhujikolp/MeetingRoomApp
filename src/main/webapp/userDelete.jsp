@@ -14,8 +14,8 @@
 	<hr>
 	退会するとこのユーザーでログインすることができなくなります<br>
 	退会しても宜しいですか？<br>
-	<table>
-		<tr>
+	<table class="margin">	
+	<tr>
 			<th>ID</th>
 			<td>${meetingRoom.user.id }</td>
 		</tr>
@@ -32,6 +32,7 @@
 			<td>${Util.htmlSpecialChars(meetingRoom.user.address) }</td>
 		</tr>
 	</table>
+	<hr>
 	<div class="button">
 		<input type="button" value="退会" class="submit">
 		<form action="<%=request.getContextPath()%>/UpdateInput.jsp">
