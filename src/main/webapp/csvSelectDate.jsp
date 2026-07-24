@@ -26,13 +26,13 @@ ReservationBean[][] reserv = mr.getReservations();
 	<h2>
 		現在の指定日：<%=mr.getDate()%></h2>
 	指定日の予約状況
-	<table>
-		<tr>
-			<th>会議室&#92;時刻</th>
+	<table class="table background">
+		<tr class="table">
+			<th class="table">会議室&#92;時刻</th>
 			<%
 			for (String time : mr.getPeriod()) {
 			%>
-			<th><%=time%></th>
+			<th class="table"><%=time%></th>
 			<%
 			}
 			%>
@@ -40,17 +40,17 @@ ReservationBean[][] reserv = mr.getReservations();
 		<%
 		for (int i = 0; i < mr.getRooms().length; i++) {
 		%>
-		<tr>
-			<th><%=mr.getRooms()[i].getName()%></th>
+		<tr class="table">
+			<td class="table"><%=mr.getRooms()[i].getName()%></td>
 			<%
 			for (ReservationBean reservation : reserv[i]) {
 			%>
-			<td>
+			<td class="table 
 				<%
 				if (reservation != null) {
-					out.print("済");
+					out.print("disabled\">済");
 				} else {
-					out.print("空");
+					out.print("ybotan\">空");
 				}
 				%>
 			</td>
@@ -62,13 +62,16 @@ ReservationBean[][] reserv = mr.getReservations();
 		}
 		%>
 	</table>
+	<hr>
+	<div class="button">
 	<form action="<%=request.getContextPath()%>/CsvExport" method="post">
-		<input type="hidden" name="char" value="UTF-8"> <input
-			type="submit" value="UTF-8で取得">
+		<input type="hidden" name="char" value="UTF-8"> 
+		<input type="submit" value="UTF-8で取得">
 	</form>
 	<form action="<%=request.getContextPath()%>/CsvExport" method="post">
-		<input type="hidden" name="char" value="MS932"> <input
-			type="submit" value="Shift-JISで取得">
+		<input type="hidden" name="char" value="MS932"> 
+		<input type="submit" value="Shift-JISで取得">
 	</form>
+	</div>
 </body>
 </html>
