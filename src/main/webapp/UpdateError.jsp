@@ -5,6 +5,7 @@
 <%@ page import="bean.RoomBean"%>
 <%@ page import="bean.UserBean"%>
 <%@ page import="bean.Util"%>
+<%UserBean u = (UserBean)request.getAttribute("userb"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,15 +21,15 @@
 <table class="margin">
 	<tr>
 		<th>名前</th>
-		<td>${userb.name}</td>
+		<td><%=Util.htmlSpecialChars(u.getName())%></td>
 	</tr>
 	<tr>
 		<th>パスワード</th>
-		<td>${userb.password}</td>
+		<td><%=Util.htmlSpecialChars(u.getPassword())%></td>
 	</tr>
 	<tr>
 		<th>住所</th>
-		<td>${userb.address}</td>
+		<td><%=Util.htmlSpecialChars(u.getAddress())%></td>
 	</tr>
 </table>
 	<hr>

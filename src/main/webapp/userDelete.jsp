@@ -2,6 +2,10 @@
 	pageEncoding="UTF-8"%>
 	<%@ page import="bean.MeetingRoom"%>
     <%@ page import="bean.UserBean"%>
+    <%@ page import="bean.Util" %>
+    <%
+    MeetingRoom mr = (MeetingRoom)session.getAttribute("meetingRoom");
+    %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,24 +18,25 @@
 	<hr>
 	退会するとこのユーザーでログインすることができなくなります<br>
 	退会しても宜しいですか？<br>
-	<table>
-		<tr>
+	<table class="margin">	
+	<tr>
 			<th>ID</th>
 			<td>${meetingRoom.user.id }</td>
 		</tr>
 		<tr>
 			<th>パスワード</th>
-			<td>${Util.htmlSpecialChars(meetingRoom.user.password) }</td>
+			<td><%=Util.htmlSpecialChars(mr.getUser().getPassword())%></td>
 		</tr>
 		<tr>
 			<th>名前</th>
-			<td>${Util.htmlSpecialChars(meetingRoom.user.name) }</td>
+			<td><%=Util.htmlSpecialChars(mr.getUser().getName())%></td>
 		</tr>
 		<tr>
 			<th>住所</th>
-			<td>${Util.htmlSpecialChars(meetingRoom.user.address) }</td>
+			<td><%=Util.htmlSpecialChars(mr.getUser().getAddress())%></td>
 		</tr>
 	</table>
+	<hr>
 	<div class="button">
 		<input type="button" value="退会" class="submit">
 		<form action="<%=request.getContextPath()%>/UpdateInput.jsp">
