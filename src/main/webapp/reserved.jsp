@@ -16,7 +16,7 @@
 <hr>
 <h2>予約完了</h2>
 
-	<table class="reserve-table">
+	<table class="reserve-table margin">
 		<tr>
 			<td class="display">予約ＩＤ</td>
 			<td>${reservation.id}</td>

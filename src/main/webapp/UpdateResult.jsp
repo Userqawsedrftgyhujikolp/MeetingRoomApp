@@ -14,7 +14,8 @@
 </head>
 <body>
 <h1>アカウント情報変更しました</h1>
-<table>
+<hr>
+<table class="margin">
 	<tr>
 		<th>ID</th>
 		<td>${userUp.id }</td>

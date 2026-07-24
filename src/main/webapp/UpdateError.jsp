@@ -18,7 +18,7 @@
 <hr>
 	<h2>変更エラー</h2>
 	<div class = "error" >${ error }</div>
-<table>
+<table class="margin">
 	<tr>
 		<th>名前</th>
 		<td><%=Util.htmlSpecialChars(u.getName())%></td>

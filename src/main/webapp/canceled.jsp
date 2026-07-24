@@ -16,7 +16,7 @@
 <h1>会議室予約キャンセル</h1>
 <hr>
 <h2>キャンセル完了</h2>
-    <table>
+    <table class="margin">
     	<tr>
     		<th>予約日</td>
     		<td>${yayaku.date}</td>

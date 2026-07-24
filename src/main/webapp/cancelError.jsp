@@ -17,7 +17,7 @@
 	<hr>
 	<h2>キャンセルエラー</h2>
 	<div class="error">${error }</div>
-    <table>
+    <table class="margin">
     	<tr>
     		<th>予約日</td>
     		<td>${yayaku.date}</td>

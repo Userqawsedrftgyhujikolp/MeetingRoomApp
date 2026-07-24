@@ -17,7 +17,7 @@
 	<hr>
 	<h2>登録エラー</h2>
 	<div class = "error" >${ error }</div>
-<table>
+<table class="margin">
 	<tr>
 		<th>名前</th>
 		<td>${Util.htmlSpecialChars(useradd.name)}</td>

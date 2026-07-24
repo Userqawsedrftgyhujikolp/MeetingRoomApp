@@ -16,7 +16,7 @@
 	<h1>会議室予約キャンセル</h1>
 	<hr>
 	<h2>キャンセル確認</h2>
-    <table>
+    <table class="margin">
     	<tr>
     		<th>予約日</td>
     		<td>${yayaku.date}</td>
@@ -35,11 +35,13 @@
     	</tr>
     </table>
 	<hr>
+	<div class="button">
 	<form action="<%=request.getContextPath()%>/CancelServlet" method="post">
 		<input type="submit" value="決定">
 	</form>
 	<form action="<%=request.getContextPath()%>/cancelInput.jsp" method="post">
 		<input type="submit" value="戻る">
 	</form>
+	</div>
 </body>
 </html>
