@@ -55,7 +55,7 @@ ReservationBean[][] reserve = mr.getReservations();
 					method="post">
 					<input type="hidden" name="roomId"
 						value="<%=mr.getRooms()[n].getId()%>"> <input
-						type="hidden" name="start" value="空">
+						type="hidden" name="start" value="<%=mr.getPeriod()[i]%>">
 					<input class="ybotan" type="submit" value="空">
 				</form> <%
  } else {
