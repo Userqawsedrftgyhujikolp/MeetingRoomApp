@@ -28,5 +28,8 @@ int story = 5;
 		<hr>
 		<input type="submit" value="追加">
 	</form>
+	<form action="<%=request.getContextPath()%>">
+		<button type="submit">戻る</button>
+	</form>
 </body>
 </html>
