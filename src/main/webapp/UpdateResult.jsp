@@ -19,7 +19,7 @@
 	<tr>
 		<th>ID</th>
 		<td>${userUp.id }</td>
-	<tr>
+	</tr>
 		<th>名前</th>
 		<td>${Util.htmlSpecialChars(userUp.name)}</td>
 	</tr>

@@ -19,8 +19,8 @@
 	
     ${error }<br>
     予約日       ${reservation.date }<br>
-    会議室名     ${Util.htmlSpecialChars(meetingRoom.getRoom(reservation.roomId).name) }<br>
-    予約時刻     ${reservation.start } ～ ${reservation.end }<br>
+    会議室名     ${Util.htmlSpecialChars(meetingRoom.getRoom(reservation!=null?reservation.roomId:null).name) }<br>
+    予約時刻     ${reservation!=null?reservation.start:"" } ～ ${reservation!=null?reservation.end:"" }<br>
     予約者       ${Util.htmlSpecialChars(meetingRoom.user.name) }<br>
 <hr>   
   <form action="<%= request.getContextPath() %>/menu.jsp"method="post">

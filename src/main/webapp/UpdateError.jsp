@@ -21,15 +21,15 @@
 <table class="margin">
 	<tr>
 		<th>名前</th>
-		<td><%=Util.htmlSpecialChars(u!=null?u.getName():"")%></td>
+		<td>${Util.htmlSpecialChars(userb.name)}</td>
 	</tr>
 	<tr>
 		<th>パスワード</th>
-		<td><%=Util.htmlSpecialChars(u!=null?u.getPassword():"")%></td>
+		<td>${Util.htmlSpecialChars(userb.password)}</td>
 	</tr>
 	<tr>
 		<th>住所</th>
-		<td><%=Util.htmlSpecialChars(u!=null?u.getAddress():"")%></td>
+		<td>${Util.htmlSpecialChars(userb.address)}</td>
 	</tr>
 </table>
 	<hr>
